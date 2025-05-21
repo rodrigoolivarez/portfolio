@@ -1,138 +1,163 @@
-import { useState, useRef, } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useRef, useState, useEffect } from 'react';
+import "animate.css";
 import emailjs from '@emailjs/browser';
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
+
 import {
-  ContactContainer as FormCard,
-  Form,
-  StyledTextField,
-  RecaptchaContainer,
+  ContactContainer,
+  SectionHeading,
+  ContactContent,
+  ContactInfo,
+  ContactForm,
+  FormField,
+  Label,
+  Input,
+  TextArea,
   SubmitButton,
-  StatusMessage,
-  ContactPageContainer
+  FeedbackMessage,
 } from './style';
 
-interface FormData {
+type FormData = {
   name: string;
   email: string;
-  title: string;
   message: string;
-}
+};
 
-const Contact: React.FC = () =>  {
+const Contact: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<FormData>();
 
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [statusType, setStatusType] = useState<'success' | 'error' | ''>('');
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const location = useLocation();
+
+ 
+  const [animateHeading, setAnimateHeading] = useState(false);
+  const [animateInfo, setAnimateInfo] = useState(false);
+  const [animateForm, setAnimateForm] = useState(false);
+
+  useEffect(() => {
+    setAnimateHeading(false);
+    setAnimateInfo(false);
+    setAnimateForm(false);
+
+    const timeout = setTimeout(() => {
+      setAnimateHeading(true);
+      setAnimateInfo(true);
+      setAnimateForm(true);
+    }, 50);
+
+    return () => clearTimeout(timeout);
+  }, [location.pathname]);
 
   const onSubmit = async (data: FormData) => {
-    setStatus('sending');
+    if (!recaptchaValue) {
+      setStatusMessage('Por favor, completa el reCAPTCHA.');
+      setStatusType('error');
+      return;
+    }
 
     try {
       await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          ...data
-        },
+        { ...data },
         import.meta.env.VITE_EMAILJS_API_KEY
       );
 
-      setStatus('success');
+      setStatusMessage('Mensaje enviado exitosamente!');
+      setStatusType('success');
       reset();
-      recaptchaRef.current?.reset();
-      setIsCaptchaVerified(false);
+      setRecaptchaValue(null);
     } catch (error) {
-      console.error('Error al enviar:', error);
-      setStatus('error');
+      setStatusMessage('Error al enviar el mensaje. Intenta de nuevo.');
+      setStatusType('error');
     }
   };
 
   return (
-    <ContactPageContainer> {/* <<< Este es el padre con display:flex */}
-      <FormCard> {/* <<< Este es el hijo que debería centrarse */}
-        <h2>Contacto</h2>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-        <StyledTextField
-          label="Nombre completo"
-          {...register('name', { required: 'Campo requerido' })}
-          error={!!errors.name}
-          helperText={errors.name?.message}
-        />
+    <ContactContainer>
+      <div className={`animate__animated ${animateHeading ? "animate__fadeInUp" : "is-hidden-until-animation"}`}>
+        <SectionHeading component="h2">Contacto</SectionHeading>
+      </div>
 
-        <StyledTextField
-          label="Email"
-          type="email"
-          {...register('email', {
-            required: 'Campo requerido',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Email inválido'
-            }
-          })}
-          error={!!errors.email}
-          helperText={errors.email?.message}
-        />
+      <ContactContent>
+        <div className={`animate__animated ${animateInfo ? "animate__fadeInLeft" : "is-hidden-until-animation"}`}>
+          <ContactInfo>
+            <p>Siempre estoy buscando nuevos desafíos y oportunidades para crear soluciones web innovadoras.</p>
+            <p>Si tienes una idea, un proyecto, o buscas trabajar conmigo, ¡no dudes en enviarme un mensaje!</p>
+            <p><strong>Email:</strong> rodrigovolivarez@gmail.com</p>
+            <p><strong>Ubicación:</strong> Buenos Aires, Argentina</p>
+          </ContactInfo>
+        </div>
 
-        <StyledTextField
-          label="Asunto"
-          {...register('title', { required: 'Campo requerido' })}
-          error={!!errors.title}
-          helperText={errors.title?.message}
-        />
+        <div className={`animate__animated ${animateForm ? "animate__fadeInRight" : "is-hidden-until-animation"}`}>
+          <ContactForm ref={formRef} onSubmit={handleSubmit(onSubmit)} noValidate>
+            <FormField>
+              <Label htmlFor="name">Nombre</Label>
+              <Input
+                id="name"
+                type="text"
+                {...register('name', { required: 'Este campo es obligatorio' })}
+              />
+              {errors.name && <small>{errors.name.message}</small>}
+            </FormField>
 
-        <StyledTextField
-          label="Mensaje"
-          multiline
-          rows={4}
-          {...register('message', {
-            required: 'Campo requerido',
-            minLength: {
-              value: 10,
-              message: 'Mínimo 10 caracteres'
-            }
-          })}
-          error={!!errors.message}
-          helperText={errors.message?.message}
-        />
+            <FormField>
+              <Label htmlFor="email">Correo</Label>
+              <Input
+                id="email"
+                type="email"
+                {...register('email', {
+                  required: 'Este campo es obligatorio',
+                  pattern: {
+                    value: /^\S+@\S+$/i,
+                    message: 'Correo inválido',
+                  },
+                })}
+              />
+              {errors.email && <small>{errors.email.message}</small>}
+            </FormField>
 
-        <RecaptchaContainer>
-          <ReCAPTCHA
-            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-            onChange={() => setIsCaptchaVerified(true)}
-            ref={recaptchaRef}
-          />
-        </RecaptchaContainer>
+            <FormField>
+              <Label htmlFor="message">Mensaje</Label>
+              <TextArea
+                id="message"
+                rows={5}
+                {...register('message', { required: 'Este campo es obligatorio' })}
+              />
+              {errors.message && <small>{errors.message.message}</small>}
+            </FormField>
 
-        <SubmitButton
-          type="submit"
-          variant="contained"
-          disabled={!isCaptchaVerified || status === 'sending'}
-          startIcon={status === 'sending' && <span className="loader" />}
-        >
-          {status === 'sending' ? 'Enviando...' : 'Enviar Mensaje'}
-        </SubmitButton>
+            <FormField>
+              <ReCAPTCHA
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                onChange={(value) => setRecaptchaValue(value)}
+              />
+            </FormField>
 
-        {status === 'success' && (
-          <StatusMessage variant="filled" severity="success">
-            Mensaje enviado exitosamente
-          </StatusMessage>
-        )}
+            <SubmitButton type="submit">Enviar</SubmitButton>
 
-        {status === 'error' && (
-          <StatusMessage variant="filled" severity="error">
-            Error al enviar el mensaje
-          </StatusMessage>
-        )}
-      </Form>
-      </FormCard>
-    </ContactPageContainer>
+            {statusMessage && (
+              <div className="animate__animated animate__fadeIn">
+                <FeedbackMessage className={statusType}>
+                  {statusMessage}
+                </FeedbackMessage>
+              </div>
+            )}
+          </ContactForm>
+        </div>
+      </ContactContent>
+    </ContactContainer>
   );
 };
 

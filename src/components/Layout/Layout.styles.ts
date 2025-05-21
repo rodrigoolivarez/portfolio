@@ -10,6 +10,7 @@ export const SiteContainer = styled.div`
 `;
 
 export const MainContent = styled.main`
+  padding-top:6rem;
   flex: 1;
   width: 100%;
   // Si aquí hubiera un 'overflow: hidden/scroll/auto' podría ser un problema.

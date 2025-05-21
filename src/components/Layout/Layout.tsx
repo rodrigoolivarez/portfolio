@@ -1,26 +1,34 @@
-import { Outlet } from 'react-router-dom';
-import { styled as muiStyled } from '@mui/system';
-import NavBar from '../NavBar/NavBar'; // Tu NavBar que usa StyledAppBar
-import { MainContent } from './Layout.styles'; // Tu MainContent con flex: 1
-import Footer from '../Footer/Footer';     // Tu Footer con margin-top: auto
+import React from 'react';
+
+import { styled as muiStyled } from '@mui/system'; 
+import NavBar from '../NavBar/NavBar';
+import { MainContent } from './Layout.styles'; 
+import Footer from '../Footer/Footer';
 
 const RootContainer = muiStyled('div')({
   width: '100%',
   minHeight: '100vh',
-  backgroundColor: 'var(--color-bg-dark-deep)',
+  backgroundColor: 'var(--color-bg-dark-deep)', 
   overflowX: 'hidden',
   display: 'flex',
   flexDirection: 'column',
 });
 
-export default function Layout() {
+
+interface LayoutProps {
+  children: React.ReactNode; 
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => { 
   return (
     <RootContainer>
-      <NavBar /> 
+      <NavBar />
       <MainContent>
-        <Outlet />
+        {children} 
       </MainContent>
       <Footer />
     </RootContainer>
   );
-}
+};
+
+export default Layout;

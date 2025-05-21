@@ -1,4 +1,3 @@
-// src/pages/Home/style.ts
 import styled from "styled-components";
 import { Box, Typography } from "@mui/material";
 import type { TypographyProps } from "@mui/material/Typography";
@@ -7,37 +6,86 @@ interface StyledTypographyProps extends TypographyProps {
     component?: React.ElementType;
 }
 
-export const Container = styled(Box)`
-  padding: 3rem 1.5rem;
-  width: 100%;
-  min-height: calc(100vh - 64px); // Asumiendo navbar de 64px
-  background-color: var(--color-bg-dark-deep); // Fondo más oscuro para Home
+
+export const PageWrapper = styled(Box)` 
+  position: relative; 
+  z-index: 0; 
+  padding: 2rem 4rem; 
+  overflow-x: hidden; 
+  background-color: var(--color-bg-dark-deep); // Fondo principal de la app
+  min-height: 100vh;
+
+  
+  #tsparticles {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+  }
+  @media (max-width: 960px) { 
+    padding: 2rem 3rem;
+  }
+
+  @media (max-width: 740px) {
+    padding: 2rem 2rem;
+  }
+
+  @media(max-width: 360px) {
+    padding: 2rem 1rem;
+  }
+`;
+
+
+export const ContentContainer = styled(Box)`
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.5rem;
+  }
 `;
 
 export const MainTitle = styled(Typography)<StyledTypographyProps>`
-  font-size: 2.8rem !important;
+  font-size: 3rem !important; 
   font-weight: 700 !important;
+  margin-top: 2rem !important; 
   margin-bottom: 0.5rem !important;
-  color: var(--color-text-light-primary) !important; // Texto principal claro
+  color: var(--color-text-light-primary) !important;
+  border-bottom: 2px solid var(--color-accent-secondary);
   text-transform: uppercase !important;
   letter-spacing: 1.5px !important;
   text-align: center;
+  z-index: 2; // Por encima de las partículas
 
   @media (max-width: 768px) {
-    font-size: 2.2rem !important;
+    font-size: 2.4rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2rem;
   }
 `;
 
 export const SubTitle = styled(Typography)<StyledTypographyProps>`
-  font-size: 1.5rem !important;
+  font-size: 1.6rem !important;
   font-weight: 400 !important;
   margin-bottom: 2.5rem !important;
   color: var(--color-text-light-secondary) !important;
   letter-spacing: 0.5px !important;
   text-align: center;
+  z-index: 2;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem !important;
+  }
 `;
 
 export const Description = styled(Typography)<StyledTypographyProps>`
@@ -47,89 +95,101 @@ export const Description = styled(Typography)<StyledTypographyProps>`
   font-size: 1.1rem;
   line-height: 1.7;
   color: var(--color-text-light-secondary);
+  z-index: 2;
 `;
 
 export const SectionTitle = styled(Typography)<StyledTypographyProps>`
-  font-size: 1.8rem !important; // Un poco más grande para Home
+  font-size: 2rem !important; 
   font-weight: 600 !important;
-  margin-top: 3rem !important;
-  margin-bottom: 2.5rem !important; // Más espacio antes del contenido de la sección
-  color: var(--color-accent-primary) !important;
+  margin-top: 1rem !important; 
+  margin-bottom: 2.5rem !important;
+  color: var(--color-text-light-primary) !important;
+  border-bottom: 2px solid var(--color-accent-secondary);
   text-align: center !important;
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
-`;
-
-export const TechGrid = styled(Box)`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1.5rem;
-  margin: 0 auto 3rem auto;
-  width: 100%;
-  max-width: 800px;
-  padding: 2rem; // Padding para la "tarjeta" de TechGrid
-  background-color: var(--color-bg-dark-primary); // Fondo de tarjeta
-  border-radius: 12px;
-  border: 1px solid var(--color-border-primary);
-  box-shadow: var(--shadow-elevation-medium);
-`;
-
-export const TechItem = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1.5rem 1rem; // Más padding vertical
-  background-color: var(--color-bg-dark-secondary); // Fondo para el item dentro de la tarjeta
-  border-radius: 8px;
-  border: 1px solid var(--color-border-secondary);
-  transition: var(--transition-fast);
-  min-height: 190px; // Para consistencia
-  justify-content: space-between;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-elevation-low);
-    border-color: var(--color-accent-primary);
-  }
-
-  & > h4 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text-light-primary);
-    margin-top: 0.8rem;
-    margin-bottom: 0.5rem;
-  }
-`;
-
-export const CertImage = styled("img")`
-  width: 100%;
-  max-width: 100px;
-  height: 70px;
-  object-fit: contain;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-  background-color: #fff; // Fondo blanco para que los certificados se vean bien
-`;
-
-export const YearBadge = styled.span`
-  display: inline-block;
-  margin-top: auto;
-  padding: 0.3rem 0.8rem;
-  background-color: var(--color-bg-dark-secondary);
-  color: var(--color-accent-primary);
-  border-radius: 20px; // Tipo píldora
-  font-size: 0.75rem;
-  font-weight: 500;
-  border: 1px solid var(--color-border-primary); // Borde más sutil
+  z-index: 2;
 `;
 
 export const Divider = styled(Box)`
   height: 1px;
   width: 100%;
-  max-width: 700px; // Ancho máximo para el divisor
+  max-width: 200px; 
   margin: 4rem auto;
   background-color: var(--color-border-primary);
   opacity: 0.5;
+  z-index: 2;
+`;
+
+
+
+export const AboutTeaserBox = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
+`;
+
+export const AboutText = styled(Typography)`
+  color: var(--color-text-light-secondary);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  z-index: 2;
+`;
+
+export const NameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+export const WaveImage = styled.img`
+  width: 80px;
+  height: 60px;
+
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 45px;
+  }
+`;
+
+
+export const SocialIconsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+  }
+`;
+
+export const CarouselWrapper = styled.div`
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.5rem;
+  }
 `;

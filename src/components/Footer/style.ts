@@ -10,34 +10,33 @@ type AnchorIconButtonProps = MuiIconButtonProps & {
   };
 
 export const FooterContainer = styled(Box).attrs({
-  component: 'footer' // Renderizar como <footer /> semánticamente
+  component: 'footer' 
 })`
-  background-color: var(--color-bg-dark-primary); // Mismo fondo que la AppBar para consistencia
+  background-color: var(--color-bg-dark-primary); 
   color: var(--color-text-light-secondary);
-  padding: 1.5rem 2rem; // Padding generoso
+  padding: 1.5rem 2rem; 
   text-align: center;
-  border-top: 1px solid var(--color-border-primary); // Línea divisoria superior
-  margin-top: auto; // <<< CLAVE para pegarlo abajo si el contenido principal es corto
-                    // Esto funciona si el contenedor padre del Footer (ej. SiteContainer en Layout) es display: flex; flex-direction: column;
-                    // y el MainContent tiene flex: 1;
+  border-top: 1px solid var(--color-border-primary); 
+  margin-top: auto; 
+ 
 `;
 
 export const FooterContent = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem; // Espacio entre el texto y los iconos
+  gap: 1rem; 
 
   @media (min-width: 768px) {
-    flex-direction: row; // En desktop, texto a un lado, iconos al otro
-    justify-content: flex-start; // Distribuir espacio
+    flex-direction: row; 
+    justify-content: flex-start; 
   }
 `;
 
 export const CopyrightText = styled(Typography)`
 padding-right: 27%;
   font-size: 0.85rem !important;
-  color: var(--color-text-light-tertiary); // Texto más sutil
+  color: var(--color-text-light-tertiary); 
 `;
 
 export const SocialIconsContainer = styled(Box)`
@@ -47,8 +46,8 @@ export const SocialIconsContainer = styled(Box)`
 
 export const FooterIconButton = styled(MuiIconButton)<AnchorIconButtonProps>`
   color: var(--color-text-light-secondary) !important;
-  background-color: transparent !important; // Sin fondo por defecto
-  padding: 0.5rem !important; // Padding más pequeño para iconos en footer
+  background-color: transparent !important; 
+  padding: 0.5rem !important; 
   transition: var(--transition-fast) !important;
 
   &:hover {
@@ -57,6 +56,6 @@ export const FooterIconButton = styled(MuiIconButton)<AnchorIconButtonProps>`
   }
 
   & .MuiSvgIcon-root {
-    font-size: 1.3rem; // Tamaño de los iconos
+    font-size: 1.3rem; 
   }
 `;

@@ -1,16 +1,16 @@
 import React from 'react';
 import { FooterContainer, FooterContent, CopyrightText, SocialIconsContainer, FooterIconButton } from './style';
 
-// Importa tus íconos de redes sociales
+
+
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import InstagramIcon from '@mui/icons-material/Instagram'; // Si lo usas
-
+import InstagramIcon from '@mui/icons-material/Instagram';
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <FooterContainer>
+    <FooterContainer >
       <FooterContent>
         <CopyrightText variant="body2">
           &copy; {currentYear} Rodrigo Olivarez. Todos los derechos reservados.
@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
         <SocialIconsContainer>
           <FooterIconButton
             component="a"
-            href="https://github.com/tu_usuario" // <<< REEMPLAZA CON TU URL
+            href="https://github.com/rodrigoolivarez"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
@@ -27,17 +27,17 @@ const Footer: React.FC = () => {
           </FooterIconButton>
           <FooterIconButton
             component="a"
-            href="https://linkedin.com/in/tu_usuario" // <<< REEMPLAZA CON TU URL
+            href="https://linkedin.com/in/rodrigoolivarez"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
           >
             <LinkedInIcon />
           </FooterIconButton>
-          {/* Descomenta si usas Instagram */}
+
           <FooterIconButton
             component="a"
-            href="https://instagram.com/tu_usuario" // <<< REEMPLAZA CON TU URL
+            href="https://instagram.com/rodrigolivarez"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"

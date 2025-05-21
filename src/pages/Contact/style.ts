@@ -1,143 +1,143 @@
-// src/pages/Contact/style.ts
 import styled from 'styled-components';
-import { TextField as MuiTextField, Button as MuiButton, Alert as MuiAlert, Box } from '@mui/material'; // Importar Box y Typography
-import type { TextFieldProps } from '@mui/material/TextField';
-import type { ButtonProps } from '@mui/material/Button';
-import type { AlertProps } from '@mui/material/Alert';
+import { Box, Typography, Button } from '@mui/material';
+import type { TypographyProps } from '@mui/material/Typography';
 
-
-export const ContactPageContainer = styled(Box)`
-  padding: 3rem 1.5rem;
-  width: 100%;
-  min-height: calc(100vh - 64px);
-  background-color: var(--color-bg-dark-deep);
-  display: flex;
-  flex-direction: column; // Eje principal es vertical.
-  justify-content: center; // Centra verticalmente los hijos a lo largo de la columna.
-  align-items: center;     // Centra horizontalmente los hijos dentro de la columna.
-`;
-
-export const ContactContainer = styled(Box)` // La "tarjeta" del formulario
-  max-width: 700px; // El ContactContainer tiene un max-width
-  width: 100%;      // Ocupa el 100% hasta ese max-width
-  padding: 2.5rem;
-  background: var(--color-bg-dark-primary);
-  border-radius: 12px;
-  color: var(--color-text-light-primary);
-  border: 1px solid var(--color-border-primary);
-  box-shadow: var(--shadow-elevation-medium);
-
-  h2 {
-    color: var(--color-accent-primary);
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1.8rem; // Más espacio entre campos
-`;
-
-// Tipado explícito para StyledTextField si usas props específicas de MUI que no se infieren bien
-interface StyledTextFieldProps extends Omit<TextFieldProps, 'variant'> {
-    variant?: 'outlined' | 'filled' | 'standard';
+interface StyledTypographyProps extends TypographyProps {
+  component?: React.ElementType;
 }
 
-export const StyledTextField = styled(MuiTextField)<StyledTextFieldProps>`
-  && { // Doble ampersand para aumentar especificidad sobre estilos MUI
-    .MuiInputBase-root { // Estilo para el contenedor del input
-      color: var(--color-text-light-primary);
-      background-color: var(--color-bg-dark-secondary); // Fondo sutil para el input
-      border-radius: 6px; // Heredar o definir
-      transition: var(--transition-fast);
-    }
-    .MuiOutlinedInput-root {
-      fieldset { // Borde del input
-        border-color: var(--color-border-primary);
-        transition: var(--transition-fast);
-      }
-      &:hover fieldset {
-        border-color: var(--color-accent-hover);
-      }
-      &.Mui-focused fieldset { // Borde cuando está enfocado
-        border-color: var(--color-accent-primary);
-        box-shadow: 0 0 0 2px rgba(var(--color-accent-primary-rgb, 88, 166, 255), 0.2); // Sombra de foco
-      }
-    }
-    .MuiInputLabel-root { // Etiqueta del input
-      color: var(--color-text-light-secondary);
-      &.Mui-focused { // Etiqueta cuando el input está enfocado
-        color: var(--color-accent-primary);
-      }
-    }
-    .MuiFormHelperText-root {
-      color: var(--color-text-light-tertiary);
-    }
+export const ContactContainer = styled(Box).attrs({ component: 'section' })`
+  padding: 2.5rem 2rem;
+  background-color: var(--color-bg-dark-deep);
+  color: var(--color-text-light-primary);
+  text-align:center
+`;
+
+export const SectionHeading = styled(Typography)<StyledTypographyProps>`
+  display: inline-block;
+  font-size: 2.5rem !important;
+  font-weight: 600 !important;
+  color: var(--color-text-light-primary) !important;
+  border-bottom: 2px solid var(--color-accent-secondary);
+  text-align: center;
+  margin-bottom: 3rem !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  @media (max-width: 600px) {
+    font-size: 2rem !important;
   }
 `;
 
-export const RecaptchaContainer = styled.div`
-  margin: 1rem 0;
+export const ContactContent = styled(Box)`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @media (min-width: 960px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+`;
+
+export const ContactInfo = styled(Box)`
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-text-light-secondary);
+
+  p {
+    margin-bottom: 1.2rem;
+  }
+
+  strong {
+    color: var(--color-accent-secondary);
+  }
+`;
+
+export const ContactForm = styled.form`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
 
-  // Estilo para el iframe de reCAPTCHA si es necesario,
-  // a veces el tema oscuro por defecto no se ve bien.
-  // Esto es un hack y puede no ser ideal:
-  // iframe { filter: invert(1) hue-rotate(180deg); }
-`;
-
-export const SubmitButton = styled(MuiButton)<ButtonProps>`
-  && {
-    background-color: var(--color-accent-primary);
-    color: var(--color-bg-dark-deep); // Texto oscuro sobre acento claro
-    padding: 10px 24px; // Ajustar padding
-    font-weight: 600; // Un poco más de peso
-    transition: var(--transition-fast);
-    border: 1px solid var(--color-accent-primary);
-
-    &:hover {
-      background-color: var(--color-accent-hover);
-      border-color: var(--color-accent-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-elevation-low);
-    }
-
-    &:disabled {
-      background-color: var(--color-border-primary);
-      color: var(--color-text-light-tertiary);
-      cursor: not-allowed;
-      border-color: var(--color-border-secondary);
-    }
-
-    // Loader (sin cambios, ya usa blanco que contrasta bien)
-    .loader { /* ... */ }
-    @keyframes spin { /* ... */ }
+  small {
+    color: var(--color-error, #ff4d4f);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
   }
 `;
 
-export const StatusMessage = styled(MuiAlert)<AlertProps>`
-  && {
-    margin-top: 1.5rem;
-    border-radius: 6px;
-    // Colores para diferentes severidades (puedes añadir más)
-    &.MuiAlert-standardSuccess {
-        background-color: rgba(var(--color-accent-secondary-rgb, 63, 185, 80), 0.1); // Necesitas definir --color-accent-secondary-rgb
-        color: var(--color-accent-secondary);
-        .MuiAlert-icon { color: var(--color-accent-secondary); }
-    }
-    &.MuiAlert-standardError {
-        background-color: rgba(244, 67, 54, 0.1); // Rojo estándar de error
-        color: #f44336;
-        .MuiAlert-icon { color: #f44336; }
-    }
-    .MuiAlert-message {
-      // El color se hereda o se define por la severidad
-    }
+export const FormField = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Label = styled.label`
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-light-primary);
+  font-weight: 500;
+`;
+
+export const Input = styled.input`
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border-primary);
+  border-radius: 0.5rem;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-light-primary);
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent-secondary);
+  }
+`;
+
+export const TextArea = styled.textarea`
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border-primary);
+  border-radius: 0.5rem;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-light-primary);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 150px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent-secondary);
+  }
+`;
+
+export const SubmitButton = styled(Button).attrs({
+  variant: 'outlined',
+})`
+  align-self: flex-start;
+  border-color: var(--color-accent-secondary) !important;
+  color: var(--color-accent-secondary) !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  padding: 0.6rem 2rem;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: var(--color-accent-secondary) !important;
+    color: #fff !important;
+    border-color: var(--color-accent-primary);
+  }
+`;
+
+export const FeedbackMessage = styled(Box)`
+  font-size: 1rem;
+  margin-top: 1rem;
+  font-weight: 500;
+
+  &.success {
+    color: var(--color-success, #3fb950);
+  }
+
+  &.error {
+    color: var(--color-error, #ff4d4f);
   }
 `;

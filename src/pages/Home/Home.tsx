@@ -1,98 +1,154 @@
-// src/pages/Home/home.tsx
 import React from 'react';
-// import { useState } from 'react'; // No necesitas useState si el modal se fue
+import { useNavigate } from 'react-router-dom';
 
-// Importa los styled-components DESDE SU PROPIO style.ts
 import {
-  Container,
+  PageWrapper,
+  ContentContainer,
   MainTitle,
   SubTitle,
+  NameWrapper,
+  WaveImage,
   Description,
   SectionTitle,
-  //TechGrid,       Si mantienes esta sección
-  //TechItem,        Si mantienes esta sección
   Divider,
-  //CertImage as TechImage,  Alias para la imagen en TechGrid
-  //YearBadge,       Si mantienes esta sección
-  // NO importes ModalStyled ni ModalContent de aquí
+  SocialIconsContainer,
+  AboutTeaserBox,
+  AboutText,
+  CarouselWrapper,
 } from './style';
 
-// Importa tu componente Modal si lo fueras a usar aquí (parece que no)
-// import Modal from '../../components/Modal/Modal';
-
-// CSS de react-slick (importar una vez en main.tsx o App.tsx es mejor)
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 import CurvedCarousel from '../../components/Home/CurvedCarousel';
-
-// Tus logos para el carrusel
-import reactLogo from '../../assets/react.svg';
-import nodeLogo from '../../assets/nodedotjs.svg';
-import tsLogo from '../../assets/typescript.svg';
-import muiLogo from '../../assets/mui.svg';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import html5Logo from '../../assets/html5.svg';
 import cssLogo from '../../assets/css.svg';
+import javascriptLogo from '../../assets/javascript.svg';
+import pooLogo from '../../assets/poo-icon.svg';
+import gitLogo from '../../assets/git.svg';
+import waveGif from '../../assets/Hello.gif';
+import { motion } from 'framer-motion';
+import { CTAButton } from '../../styles/Global';
 
-// Si tienes una sección de "Tecnologías Principales" separada del carrusel
-//import certHTML from '../../assets/certHTML.png'; // Asumo que estas son para la TechGrid
-//import certJS from '../../assets/certJS.png';
 
-interface TechLogoItem {
-  name: string;
-  icon: string;
-}
 
-// Para la sección "Tecnologías Principales" (TechGrid) si la mantienes
-//interface TechnologyGridItem {
-  //id: string;
-  //name: string;
-  //image: string; // Imagen para el grid
-  //year: string;
-//}
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8 } },
+};
 
 const Home: React.FC = () => {
-  // El estado y manejadores del modal se eliminan si el modal no está en esta página
-  // const [selectedImageForModal, setSelectedImageForModal] = useState<string | null>(null);
-  // const handleOpenModal = (imageSrc: string) => setSelectedImageForModal(imageSrc);
-  // const handleCloseModal = () => setSelectedImageForModal(null);
+  const navigate = useNavigate();
 
-  // Datos para la TechGrid (si la mantienes en Home)
-  //  const technologiesForGrid: TechnologyGridItem[] = [
-  //  { id: 'htmlCert', name: 'HTML5', image: certHTML, year: '2023' },
-  // { id: 'jsCert', name: 'JavaScript', image: certJS, year: '2023' },
-  //];
-
-  const techLogosForCarousel: TechLogoItem[] = [
-    { name: 'React', icon: reactLogo },
-    { name: 'Node.js', icon: nodeLogo },
-    { name: 'TypeScript', icon: tsLogo },
-    { name: 'Material UI', icon: muiLogo },
+  const techLogos = [
+    { name: 'Javascript', icon: javascriptLogo },
+    { name: 'Git', icon: gitLogo },
+    { name: 'POO con IA', icon: pooLogo },
     { name: 'CSS', icon: cssLogo },
     { name: 'HTML5', icon: html5Logo },
   ];
 
   return (
-    <Container> {/* Contenedor principal de la página Home */}
-      <MainTitle component="h1">Rodrigo Olivarez</MainTitle>
-      <SubTitle component="h2">Full Stack Developer</SubTitle>
-      <Description component="p">
-        Especialista en desarrollo de aplicaciones web modernas con React,
-        Node.js y arquitecturas cloud.
-      </Description>
+    <PageWrapper>
+      <ContentContainer>
 
-      <Divider />
+        <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+          <NameWrapper>
+            <WaveImage src={waveGif} alt="wave gif" />
+            <MainTitle component="h1">
+              &lt;Rodrigo Olivarez/&gt;
+            </MainTitle>
+          </NameWrapper>
+        </motion.div>
 
+        <motion.div variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.2 }}>
+          <SubTitle component="h2">Full Stack Developer</SubTitle>
+        </motion.div>
 
+        <motion.div variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.3 }}>
+          <SocialIconsContainer>
+            <CTAButton
+              variant="outlined"
+              as="a"
+              href="https://www.linkedin.com/in/rodrigoolivarez/"
+              target="_blank"
+              rel="noopener noreferrer"
 
-      <section>
-        <SectionTitle component="h3">Lenguajes y Herramientas</SectionTitle>
-        <CurvedCarousel logos={techLogosForCarousel} autoplaySpeed={3000} />
-      </section>
+            >
+              <LinkedInIcon />
+            </CTAButton>
 
-      <Divider />
+            <CTAButton
+              variant="outlined"
+              as="a"
+              href="https://github.com/rodrigoolivarez"
+              target="_blank"
+              rel="noopener noreferrer"
 
-    </Container>
+            >
+              <GitHubIcon />
+            </CTAButton>
+
+            <CTAButton
+              variant="outlined"
+              as="a"
+              href="https://www.instagram.com/rodrigolivarez/"
+              target="_blank"
+              rel="noopener noreferrer"
+
+            >
+              <InstagramIcon />
+            </CTAButton>
+          </SocialIconsContainer>
+        </motion.div>
+
+        <motion.div variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.4 }}>
+          <Description component="p">
+            Transformando ideas en experiencias digitales intuitivas y escalables.
+          </Description>
+        </motion.div>
+
+        <motion.div variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.6 }}>
+          <CTAButton variant="outlined" onClick={() => navigate('/proyectos')}>
+            Ver Proyectos
+          </CTAButton>
+        </motion.div>
+
+        <Divider />
+
+        <motion.div
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <SectionTitle component="h3">Certificados</SectionTitle>
+          <CarouselWrapper>
+            <CurvedCarousel logos={techLogos} autoplaySpeed={3000} />
+          </CarouselWrapper>
+        </motion.div>
+
+        <Divider />
+
+        <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }}>
+          <SectionTitle component="h3">¿Quién soy?</SectionTitle>
+          <AboutTeaserBox>
+            <AboutText>
+              Apasionado por la tecnología y el desarrollo web, con enfoque en rendimiento, usabilidad y código limpio.
+            </AboutText>
+            <CTAButton variant="outlined" onClick={() => navigate('/sobre-mi')}>
+              Saber más
+            </CTAButton>
+          </AboutTeaserBox>
+        </motion.div>
+      </ContentContainer>
+    </PageWrapper>
   );
 };
 
