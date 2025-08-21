@@ -9,9 +9,9 @@ interface StyledTypographyProps extends TypographyProps {
 
 export const AboutPageContainer = styled(Box).attrs({ component: 'section' })`
   padding: 2rem;
-  background-color: var(--color-bg-dark-deep);
+  background-color: color-mix(in srgb, var(--color-bg-dark-deep) 50%, transparent);
+  backdrop-filter: blur(0.5px);
   color: var(--color-text-light-primary);
-
   @media (max-width: 600px) {
     padding: 1.2rem;
   }
@@ -151,19 +151,21 @@ export const HabilityItem = styled(Box)`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  filter: invert(57%) sepia(100%) saturate(304%) hue-rotate(77deg) brightness(87%) contrast(94%);
-  /* background-color: var(--color-accent-secondary); */
 
   img {
     width: 3.8rem;
     height: 3.8rem;
     object-fit: contain;
-    transition: transform 0.2s ease-in-out;
-    filter: grayscale(30%) opacity(0.8);
+    transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    /* Tinte + desaturación inicial */
+    filter: var(--tech-filter) grayscale(30%);
+    opacity: 0.9;
+    will-change: transform, filter;
 
     &:hover {
       transform: scale(1.15);
-      filter: grayscale(0%) opacity(1);
+      filter: var(--tech-filter-hover) grayscale(0%);
+      opacity: 1;
     }
 
     @media (max-width: 480px) {

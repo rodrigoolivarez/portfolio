@@ -1,0 +1,70 @@
+{
+  "nav": { "home": "Inicio", "about": "Sobre Mí", "projects": "Proyectos", "contact": "Contacto" },
+
+  "home": {
+    "title": "<Rodrigo Olivarez/>",
+    "role": "Desarrollador Web Full Stack",
+    "desc": "Transformando ideas en experiencias digitales intuitivas y escalables.",
+    "seeProjects": "Ver Proyectos",
+    "whoAmI": "¿Quién soy?",
+    "whoAmIDesc": "Apasionado por la tecnología y el desarrollo web, con enfoque en rendimiento, usabilidad y código limpio.",
+    "learnMore": "Saber más",
+    "certs": "Certificados"
+  },
+
+  "about": {
+    "title": "Sobre mí",
+    "greeting": "¡Hola! Soy Rodrigo,",
+    "role": "un desarrollador web entusiasta de la tecnología. Me apasiona crear soluciones innovadoras y eficientes.",
+    "p1": "Busco oportunidades para crecer y fortalecer mis habilidades. Aprendiendo y enfrentándo nuevos desafíos en el proceso.",
+    "p2": "Mis fortalezas incluyen la resolución de problemas, la atención al detalle y la capacidad de trabajar en equipo.",
+    "education": "Educación",
+    "experience": "Experiencia",
+    "degree": "Desarrollo web full stack",
+    "institution": "Fundación Banco Nación | Educación IT | Fundación Pescar",
+    "periodEdu": "Febrero 2025 - Presente (237hs)",
+    "roleExp": "Desarrollador front end",
+    "companyExp": "Freelance",
+    "periodExp": "Julio 2024 - Presente",
+    "locationExp": "Buenos Aires, Argentina",
+    "skillsTitle": "Mis Habilidades Principales"
+  },
+
+  "projects": {
+    "featured": "Proyectos Destacados",
+    "demo": "Ver Demo",
+    "code": "Código",
+    "items": {
+      "portfolio": {
+        "title": "Portfolio Personal",
+        "desc": "Mi portfolio personal, desarrollado con React y TypeScript. Incluye un diseño responsivo y una sección de proyectos destacados."
+      },
+      "atm": {
+        "title": "Cajero Automático",
+        "desc": "Primer proyecto de React. Simula un cajero con consulta de saldo y retiro utilizando local storage. Diseño responsive. Introducir PIN 1-6"
+      },
+      "empredemia": {
+        "title": "Empredemia",
+        "desc": "Plataforma de cursos para emprendedores. Trabajado en React-Typescript, junto con NodeJS, MongoDB-Atlas como base de datos (local-nube), JWTtoken-Bcrypt para validaciones y contraseñas."
+      }
+    }
+  },
+
+  "contact": {
+    "title": "Contacto",
+    "lead1": "Siempre estoy buscando nuevos desafíos y oportunidades para crear soluciones web innovadoras.",
+    "lead2": "Si tienes una idea, un proyecto, o buscas trabajar conmigo, ¡no dudes en enviarme un mensaje!",
+    "email": "Correo",
+    "name": "Nombre",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "statusSuccess": "¡Mensaje enviado exitosamente!",
+    "statusError": "Error al enviar el mensaje. Intenta de nuevo.",
+    "captcha": "Por favor, completa el reCAPTCHA.",
+    "location": "Ubicación",
+    "errors": {
+      "required": "Este campo es obligatorio",
+      "invalidEmail": "Correo inválido"
+    }
+  }
+}

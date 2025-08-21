@@ -5,7 +5,7 @@ import {
   CarouselItemStyled,
   TechLogo,
   TechName
-} from './CurvedCarousel.style';
+} from './style';
 import Modal from '../Modal/Modal';
 
 import certHTML from '../../assets/certificates/certHTML.png';

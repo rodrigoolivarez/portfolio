@@ -1,0 +1,71 @@
+{
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "contact": "Contact"
+    },
+    "home": {
+        "title": "<Rodrigo Olivarez/>",
+        "role": "Full Stack Web Developer",
+        "desc": "Turning ideas into intuitive, scalable digital experiences.",
+        "seeProjects": "See Projects",
+        "whoAmI": "Who am I?",
+        "whoAmIDesc": "Passionate about technology and web development, focused on performance, usability and clean code.",
+        "learnMore": "Learn more",
+        "certs": "Certificates"
+    },
+    "about": {
+        "title": "About me",
+        "greeting": "Hi! I'm Rodrigo,",
+        "role": "a web developer passionate about technology. I love building innovative and efficient solutions.",
+        "p1": "I'm looking for opportunities to grow and strengthen my skills.",
+        "p2": "My strengths include problem-solving, attention to detail and teamwork.",
+        "education": "Education",
+        "experience": "Experience",
+        "degree": "Full-stack Web Development",
+        "institution": "Fundación Banco Nación | Educación IT | Fundación Pescar",
+        "periodEdu": "Feb 2025 – Present (237h)",
+        "roleExp": "Front-end Developer",
+        "companyExp": "Freelance",
+        "periodExp": "Jul 2024 – Present",
+        "locationExp": "Buenos Aires, Argentina",
+        "skillsTitle": "Main Skills"
+    },
+    "projects": {
+        "featured": "Featured Projects",
+        "demo": "Live Demo",
+        "code": "Code",
+        "items": {
+            "portfolio": {
+                "title": "Personal Portfolio",
+                "desc": "My personal portfolio built with React and TypeScript. Responsive design and a highlighted projects section."
+            },
+            "atm": {
+                "title": "ATM Simulator",
+                "desc": "My first React project. Simulates an ATM (balance check and withdrawal) using local storage. Fully responsive. Enter PIN 1-6"
+            },
+            "empredemia": {
+                "title": "Empredemia",
+                "desc": "Course platform for entrepreneurs. Worked on React-Typescript, with NodeJS, MongoDB-Atlas for database (local-cloud) and JWTtoken-Bcrypt for validations and passwords"
+            }
+        }
+    },
+    "contact": {
+        "title": "Contact",
+        "lead1": "I’m always looking for new challenges and opportunities to build innovative web solutions.",
+        "lead2": "If you have an idea or a project, feel free to send me a message!",
+        "email": "Email",
+        "name": "Name",
+        "message": "Message",
+        "send": "Send",
+        "statusSuccess": "Message sent successfully!",
+        "statusError": "Error sending the message. Try again.",
+        "captcha": "Please complete the reCAPTCHA.",
+        "location": "Location",
+        "errors": {
+            "required": "This field is required",
+            "invalidEmail": "Invalid email"
+        }
+    }
+}

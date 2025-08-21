@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import type { TypographyProps } from "@mui/material/Typography";
 
 interface StyledTypographyProps extends TypographyProps {
-    component?: React.ElementType;
+  component?: React.ElementType;
 }
 
 
@@ -12,18 +12,10 @@ export const PageWrapper = styled(Box)`
   z-index: 0; 
   padding: 2rem 4rem; 
   overflow-x: hidden; 
-  background-color: var(--color-bg-dark-deep); // Fondo principal de la app
+  background-color: color-mix(in srgb, var(--color-bg-dark-deep) 50%, transparent);
+  backdrop-filter: blur(0.5px);
   min-height: 100vh;
 
-  
-  #tsparticles {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; 
-  }
   @media (max-width: 960px) { 
     padding: 2rem 3rem;
   }
@@ -53,7 +45,7 @@ export const ContentContainer = styled(Box)`
   }
 `;
 
-export const MainTitle = styled(Typography)<StyledTypographyProps>`
+export const MainTitle = styled(Typography) <StyledTypographyProps>`
   font-size: 3rem !important; 
   font-weight: 700 !important;
   margin-top: 2rem !important; 
@@ -74,7 +66,7 @@ export const MainTitle = styled(Typography)<StyledTypographyProps>`
   }
 `;
 
-export const SubTitle = styled(Typography)<StyledTypographyProps>`
+export const SubTitle = styled(Typography) <StyledTypographyProps>`
   font-size: 1.6rem !important;
   font-weight: 400 !important;
   margin-bottom: 2.5rem !important;
@@ -88,7 +80,7 @@ export const SubTitle = styled(Typography)<StyledTypographyProps>`
   }
 `;
 
-export const Description = styled(Typography)<StyledTypographyProps>`
+export const Description = styled(Typography) <StyledTypographyProps>`
   text-align: center;
   max-width: 700px;
   margin: 0 auto 3rem auto;
@@ -98,7 +90,7 @@ export const Description = styled(Typography)<StyledTypographyProps>`
   z-index: 2;
 `;
 
-export const SectionTitle = styled(Typography)<StyledTypographyProps>`
+export const SectionTitle = styled(Typography) <StyledTypographyProps>`
   font-size: 2rem !important; 
   font-weight: 600 !important;
   margin-top: 1rem !important; 
@@ -116,7 +108,7 @@ export const Divider = styled(Box)`
   width: 100%;
   max-width: 200px; 
   margin: 4rem auto;
-  background-color: var(--color-border-primary);
+  background-color: var(--color-border-primary); 
   opacity: 0.5;
   z-index: 2;
 `;

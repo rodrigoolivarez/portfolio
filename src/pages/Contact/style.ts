@@ -8,7 +8,8 @@ interface StyledTypographyProps extends TypographyProps {
 
 export const ContactContainer = styled(Box).attrs({ component: 'section' })`
   padding: 2.5rem 2rem;
-  background-color: var(--color-bg-dark-deep);
+  background-color: color-mix(in srgb, var(--color-bg-dark-deep) 50%, transparent);
+  backdrop-filter: blur(0.8px);
   color: var(--color-text-light-primary);
   text-align:center
 `;

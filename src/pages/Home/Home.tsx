@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import {
   PageWrapper,
@@ -30,9 +31,6 @@ import waveGif from '../../assets/Hello.gif';
 import { motion } from 'framer-motion';
 import { CTAButton } from '../../styles/Global';
 
-
-
-
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -45,6 +43,7 @@ const fadeIn = {
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const techLogos = [
     { name: 'Javascript', icon: javascriptLogo },
@@ -57,18 +56,15 @@ const Home: React.FC = () => {
   return (
     <PageWrapper>
       <ContentContainer>
-
         <motion.div variants={fadeInUp} initial="hidden" animate="visible">
           <NameWrapper>
             <WaveImage src={waveGif} alt="wave gif" />
-            <MainTitle component="h1">
-              &lt;Rodrigo Olivarez/&gt;
-            </MainTitle>
+            <MainTitle component="h1">{t('home.title')}</MainTitle>
           </NameWrapper>
         </motion.div>
 
         <motion.div variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.2 }}>
-          <SubTitle component="h2">Full Stack Developer</SubTitle>
+          <SubTitle component="h2">{t('home.role')}</SubTitle>
         </motion.div>
 
         <motion.div variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.3 }}>
@@ -79,7 +75,6 @@ const Home: React.FC = () => {
               href="https://www.linkedin.com/in/rodrigoolivarez/"
               target="_blank"
               rel="noopener noreferrer"
-
             >
               <LinkedInIcon />
             </CTAButton>
@@ -90,7 +85,6 @@ const Home: React.FC = () => {
               href="https://github.com/rodrigoolivarez"
               target="_blank"
               rel="noopener noreferrer"
-
             >
               <GitHubIcon />
             </CTAButton>
@@ -101,7 +95,6 @@ const Home: React.FC = () => {
               href="https://www.instagram.com/rodrigolivarez/"
               target="_blank"
               rel="noopener noreferrer"
-
             >
               <InstagramIcon />
             </CTAButton>
@@ -109,15 +102,22 @@ const Home: React.FC = () => {
         </motion.div>
 
         <motion.div variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.4 }}>
-          <Description component="p">
-            Transformando ideas en experiencias digitales intuitivas y escalables.
-          </Description>
+          <Description component="p">{t('home.desc')}</Description>
         </motion.div>
 
         <motion.div variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.6 }}>
           <CTAButton variant="outlined" onClick={() => navigate('/proyectos')}>
-            Ver Proyectos
+            {t('home.seeProjects')}
           </CTAButton>
+        </motion.div>
+
+        <Divider />
+
+        <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <SectionTitle component="h3">{t('home.certs')}</SectionTitle>
+          <CarouselWrapper>
+            <CurvedCarousel logos={techLogos} autoplaySpeed={3000} />
+          </CarouselWrapper>
         </motion.div>
 
         <Divider />
@@ -127,23 +127,13 @@ const Home: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
         >
-          <SectionTitle component="h3">Certificados</SectionTitle>
-          <CarouselWrapper>
-            <CurvedCarousel logos={techLogos} autoplaySpeed={3000} />
-          </CarouselWrapper>
-        </motion.div>
-
-        <Divider />
-
-        <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }}>
-          <SectionTitle component="h3">¿Quién soy?</SectionTitle>
+          <SectionTitle component="h3">{t('home.whoAmI')}</SectionTitle>
           <AboutTeaserBox>
-            <AboutText>
-              Apasionado por la tecnología y el desarrollo web, con enfoque en rendimiento, usabilidad y código limpio.
-            </AboutText>
+            <AboutText>{t('home.whoAmIDesc')}</AboutText>
             <CTAButton variant="outlined" onClick={() => navigate('/sobre-mi')}>
-              Saber más
+              {t('home.learnMore')}
             </CTAButton>
           </AboutTeaserBox>
         </motion.div>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Box, Typography, Button } from "@mui/material";
+import { Typography } from "@mui/material";
 import type { TypographyProps } from "@mui/material/Typography";
 
 interface StyledTypographyProps extends TypographyProps {
@@ -12,7 +12,8 @@ export const ProjectsContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--color-background);
+  background-color: color-mix(in srgb, var(--color-bg-dark-deep) 50%, transparent);
+  backdrop-filter: blur(0.5px);
 `;
 
 

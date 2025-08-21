@@ -43,14 +43,14 @@ export const AboutMe: React.FC = () => {
   const hardSkills = [
     { src: jsIcon, alt: "JavaScript" }, { src: reactIcon, alt: "React" },
     { src: typescriptIcon, alt: "TypeScript" }, { src: htmlIcon, alt: "HTML5" },
-    { src: cssIcon, alt: "CSS" },   { src: muiIcon, alt: "Material UI" },
+    { src: cssIcon, alt: "CSS" }, { src: muiIcon, alt: "Material UI" },
     { src: styledcomIcon, alt: "Styled Components" }, { src: tailwindIcon, alt: "Tailwind CSS" },
     { src: viteIcon, alt: "Vite" }, { src: nodeIcon, alt: "Node.js" },
     { src: mongodbIcon, alt: "MongoDB" }, { src: postmanIcon, alt: "Postman" },
     { src: gitIcon, alt: "Git" }, { src: githubIcon, alt: "GitHub" },
     { src: angularIcon, alt: "Angular" }, { src: canvaIcon, alt: "Canva" },
-    
-    
+
+
   ];
 
   const personalInfo = {
@@ -135,50 +135,30 @@ export const AboutMe: React.FC = () => {
           </motion.div>
         </AboutTextContent>
 
-       <AboutImageContainer>
-  <motion.div
-    ref={imageRef}
-    initial={{ opacity: 0, x: 50 }}
-    animate={imageInView ? { opacity: 1, x: 0 } : {}}
-    transition={{ duration: 0.8 }}
-  >
-    <img src={profilePic} alt="Rodrigo Olivarez" />
-    
-    
-    <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-      <CTAButton
-              variant="outlined"
-              as="a"
-              href="https://github.com/rodrigoolivarez"
-              target="_blank"
-              rel="noopener noreferrer"
+        <AboutImageContainer>
+          <motion.div
+            ref={imageRef}
+            initial={{ opacity: 0, x: 50 }}
+            animate={imageInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+          >
+            <img src={profilePic} alt="Rodrigo Olivarez" />
 
-            >
-              <LinkedInIcon />
-            </CTAButton>
-      <CTAButton
-              variant="outlined"
-              as="a"
-              href="https://github.com/rodrigoolivarez"
-              target="_blank"
-              rel="noopener noreferrer"
 
-            >
-              <GitHubIcon />
-            </CTAButton>
-      <CTAButton
-              variant="outlined"
-              as="a"
-              href="https://github.com/rodrigoolivarez"
-              target="_blank"
-              rel="noopener noreferrer"
+            <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+              <CTAButton as="a" href="https://www.linkedin.com/in/rodrigoolivarez/" target="_blank" rel="noopener noreferrer">
+                <LinkedInIcon />
+              </CTAButton>
+              <CTAButton as="a" href="https://github.com/rodrigoolivarez" target="_blank" rel="noopener noreferrer">
+                <GitHubIcon />
+              </CTAButton>
+              <CTAButton as="a" href="https://www.instagram.com/rodrigolivarez/" target="_blank" rel="noopener noreferrer">
+                <InstagramIcon />
+              </CTAButton>
 
-            >
-              <InstagramIcon />
-            </CTAButton>
-    </div>
-  </motion.div>
-</AboutImageContainer>
+            </div>
+          </motion.div>
+        </AboutImageContainer>
       </AboutContentGrid>
     </AboutPageContainer>
   );

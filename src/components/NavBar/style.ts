@@ -144,3 +144,16 @@ export const NavLinkButton = styled(MuiButton)<NavLinkButtonProps>`
     }
   }
 `;
+
+export const ActionsRight = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  /* Si tu Container ya usa justify-between, podés quitar margin-left:auto */
+  
+  @media (max-width: 768px) {
+    gap: 0.25rem;
+  }
+`;
