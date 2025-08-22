@@ -36,7 +36,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         tailSoftWidth={4.5}
         tailBlur={10}           
         headRadius={1.8}
-        colorHex="#3FB950"
+        colorHex="#1c5524ff"
         mobileOverrides={{
           // si querés forzar tu propia detección:
           // isMobilePredicate: () => window.innerWidth < 820,
