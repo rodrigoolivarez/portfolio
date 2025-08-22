@@ -8,7 +8,7 @@ interface StyledTypographyProps extends TypographyProps {
 
 export const ProjectsContainer = styled.section`
   width: 100%;
-  padding: 4rem 2rem;
+  padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;

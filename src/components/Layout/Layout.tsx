@@ -23,8 +23,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <ShootingStarCanvas
         
-        density={0.0000329}
-        speed={150}
+        density={0.000033}
+        speed={200}
         twinkleDensity={0.00001}
         growMin={0.25}
         growMax={0.5}

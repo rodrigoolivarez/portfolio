@@ -1,21 +1,27 @@
 import React from 'react';
-import { FooterContainer, FooterContent, CopyrightText, SocialIconsContainer, FooterIconButton } from './style';
-
-
+import {
+  FooterContainer,
+  FooterContent,
+  CopyrightText,
+  SocialIconsContainer,
+  FooterIconButton
+} from './style';
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
+
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <FooterContainer >
+    <FooterContainer>
       <FooterContent>
         <CopyrightText variant="body2">
           &copy; {currentYear} Rodrigo Olivarez. Todos los derechos reservados.
         </CopyrightText>
-        <SocialIconsContainer>
+
+        <SocialIconsContainer aria-label="Redes sociales">
           <FooterIconButton
             component="a"
             href="https://github.com/rodrigoolivarez"
@@ -25,6 +31,7 @@ const Footer: React.FC = () => {
           >
             <GitHubIcon />
           </FooterIconButton>
+
           <FooterIconButton
             component="a"
             href="https://linkedin.com/in/rodrigoolivarez"
