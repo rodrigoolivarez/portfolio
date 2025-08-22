@@ -3,8 +3,20 @@ import styled from "styled-components";
 
 type Mode = "light" | "dark";
 
+type MobileOverrides = {
+  enabled?: boolean;
+  isMobilePredicate?: () => boolean;
+  dprCap?: number;
+  densityFactor?: number;
+  twinkleFactor?: number;
+  speedFactor?: number;
+  tailFactor?: number;
+  respectSaveData?: boolean;
+  pauseOnHidden?: boolean;
+};
+
 type Props = {
-  mode?: Mode;              // opcional: si no lo pasás, detecta .light en <html> y reacciona a cambios
+  mode?: Mode;
   density?: number;
   speed?: number;
   twinkleDensity?: number;
@@ -18,7 +30,8 @@ type Props = {
   tailSoftWidth?: number;
   tailBlur?: number;
   headRadius?: number;
-  colorHex?: string;        // opcional: fuerza el verde en modo claro (por si querés override)
+  colorHex?: string;
+  mobileOverrides?: MobileOverrides;
 };
 
 const Layer = styled.canvas`
@@ -41,36 +54,24 @@ type Star = {
 
 const easeOutCubic = (p: number) => 1 - Math.pow(1 - Math.min(Math.max(p, 0), 1), 3);
 
-// ---------- helpers de color ----------
+// helpers color
 const rgba = (rgb: [number, number, number], a: number) => `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a})`;
-
-function cssVar(name: string): string | null {
+const cssVar = (name: string) => {
   const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   return v || null;
-}
+};
 function hexToRgb(hex: string): [number, number, number] | null {
   const h = hex.replace("#", "").trim();
-  if (h.length === 3) {
-    const r = parseInt(h[0] + h[0], 16);
-    const g = parseInt(h[1] + h[1], 16);
-    const b = parseInt(h[2] + h[2], 16);
-    return [r, g, b];
-  }
-  if (h.length === 6) {
-    const r = parseInt(h.slice(0, 2), 16);
-    const g = parseInt(h.slice(2, 4), 16);
-    const b = parseInt(h.slice(4, 6), 16);
-    return [r, g, b];
-  }
+  if (h.length === 3) return [0,1,2].map(i => parseInt(h[i]+h[i],16)) as [number,number,number];
+  if (h.length === 6) return [0,2,4].map(i => parseInt(h.slice(i,i+2),16)) as [number,number,number];
   return null;
 }
 function parseRgbString(rgb: string): [number, number, number] | null {
   const m = rgb.replace(/\s+/g, "").match(/^rgba?\((\d+),(\d+),(\d+)/i);
   return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null;
 }
-function darken([r, g, b]: [number, number, number], factor = 0.6): [number, number, number] {
-  return [Math.round(r * factor), Math.round(g * factor), Math.round(b * factor)];
-}
+const darken = ([r,g,b]: [number,number,number], f=0.6): [number,number,number] =>
+  [Math.round(r*f), Math.round(g*f), Math.round(b*f)];
 function pickAccentSecondaryRGB(colorHex?: string): [number, number, number] {
   if (colorHex) {
     const p = hexToRgb(colorHex) || parseRgbString(colorHex);
@@ -83,7 +84,13 @@ function pickAccentSecondaryRGB(colorHex?: string): [number, number, number] {
   }
   return [63, 185, 80]; // #3FB950
 }
-// --------------------------------------
+
+// redondeo estocástico para spawns visibles en pantallas chicas
+const stochasticCount = (expected: number) => {
+  const base = Math.floor(expected);
+  const frac = expected - base;
+  return base + (Math.random() < frac ? 1 : 0);
+};
 
 const ShootingStarCanvas: React.FC<Props> = ({
   mode,
@@ -101,6 +108,7 @@ const ShootingStarCanvas: React.FC<Props> = ({
   tailBlur = 8,
   headRadius = 1.8,
   colorHex,
+  mobileOverrides,
 }) => {
   const ref = useRef<HTMLCanvasElement | null>(null);
   const raf = useRef<number>(0);
@@ -119,7 +127,6 @@ const ShootingStarCanvas: React.FC<Props> = ({
   };
 
   useEffect(() => {
-
     const initialIsLight = mode ? mode === "light" : document.documentElement.classList.contains("light");
     applyModeToColors(initialIsLight);
 
@@ -127,13 +134,10 @@ const ShootingStarCanvas: React.FC<Props> = ({
     if (mode === undefined && typeof MutationObserver !== "undefined") {
       observer = new MutationObserver(() => {
         const nowIsLight = document.documentElement.classList.contains("light");
-        if (nowIsLight !== isLightRef.current) {
-          applyModeToColors(nowIsLight);
-        }
+        if (nowIsLight !== isLightRef.current) applyModeToColors(nowIsLight);
       });
       observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     }
-
     return () => observer?.disconnect();
   }, [mode, colorHex]);
 
@@ -142,14 +146,40 @@ const ShootingStarCanvas: React.FC<Props> = ({
 
     const canvas = ref.current!;
     const ctx = canvas.getContext("2d", { alpha: true })!;
-    const DPR = Math.max(1, Math.floor(window.devicePixelRatio || 1));
-    let w = 0, h = 0;
 
+    const mqCoarse = window.matchMedia?.("(pointer: coarse)")?.matches ?? false;
+    const defaultIsMobile = mqCoarse || window.innerWidth < 820;
+    const isMobile = mobileOverrides?.isMobilePredicate
+      ? !!mobileOverrides.isMobilePredicate()
+      : defaultIsMobile;
+
+    const enabled = mobileOverrides?.enabled ?? true;
+    const saveData = (navigator as any)?.connection?.saveData === true;
+    const respectSaveData = mobileOverrides?.respectSaveData ?? true;
+
+    const rawDpr = Math.max(1, window.devicePixelRatio || 1);
+    const mobileDprCap = mobileOverrides?.dprCap ?? 1.5;
+    const DPR = Math.min(rawDpr, isMobile && enabled ? mobileDprCap : 2);
+
+    const mobDensityF = mobileOverrides?.densityFactor ?? 0.6;
+    const mobTwinkleF = mobileOverrides?.twinkleFactor ?? 0.6;
+    const mobSpeedF = mobileOverrides?.speedFactor ?? 0.85;
+    const mobTailF = mobileOverrides?.tailFactor ?? 0.85;
+
+    const saveDataScale = respectSaveData && saveData ? 0.6 : 1;
+
+    const densityEff = density * (isMobile && enabled ? mobDensityF : 1) * saveDataScale;
+    const twinkleDensityEff = twinkleDensity * (isMobile && enabled ? mobTwinkleF : 1) * saveDataScale;
+    const speedEff = speed * (isMobile && enabled ? mobSpeedF : 1) * (saveData ? 0.9 : 1);
+    const tailMinEff = tailMin * (isMobile && enabled ? mobTailF : 1);
+    const tailMaxEff = tailMax * (isMobile && enabled ? mobTailF : 1);
+
+    let w = 0, h = 0;
     const resize = () => {
       w = canvas.clientWidth;
       h = canvas.clientHeight;
-      canvas.width = w * DPR;
-      canvas.height = h * DPR;
+      canvas.width = Math.max(1, Math.floor(w * DPR));
+      canvas.height = Math.max(1, Math.floor(h * DPR));
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     };
 
@@ -161,12 +191,12 @@ const ShootingStarCanvas: React.FC<Props> = ({
       const x0 = w * 0.05 + Math.random() * (w * 0.9);
       const y0 = h * 0.05 + Math.random() * (h * 0.9);
       const ang = deg(rnd(15, 24));
-      const vx = Math.cos(ang) * speed;
-      const vy = Math.sin(ang) * speed;
+      const vx = Math.cos(ang) * speedEff;
+      const vy = Math.sin(ang) * speedEff;
 
       stars.push({
         x0, y0, x: x0, y: y0, ang, vx, vy,
-        lenMax: rnd(tailMin, tailMax),
+        lenMax: rnd(tailMinEff, tailMaxEff),
         t: 0, delay: rnd(delayMin, delayMax),
         grow: rnd(growMin, growMax),
         ttl: rnd(2.8, 3.8),
@@ -174,7 +204,7 @@ const ShootingStarCanvas: React.FC<Props> = ({
     };
 
     const twinkle = (dt: number) => {
-      const count = Math.floor(w * h * twinkleDensity * dt);
+      const count = stochasticCount(w * h * twinkleDensityEff * dt);
       if (!count) return;
       const tw = twinkleRgbRef.current;
       ctx.fillStyle = rgba(tw, isLightRef.current ? 0.28 : 0.35);
@@ -185,17 +215,22 @@ const ShootingStarCanvas: React.FC<Props> = ({
 
     resize();
     const onResize = () => resize();
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize, { passive: true });
 
     let last = performance.now();
+    let stopped = false;
+    const pauseOnHidden = mobileOverrides?.pauseOnHidden ?? true;
+
     const loop = (t: number) => {
+      if (stopped) return;
       const dt = Math.min(0.033, (t - last) / 1000);
       last = t;
 
       ctx.clearRect(0, 0, w, h);
       twinkle(dt);
 
-      const want = Math.floor(w * h * density * dt);
+      const expect = w * h * densityEff * dt;
+      const want = stochasticCount(expect);
       for (let i = 0; i < want; i++) spawn();
 
       ctx.save();
@@ -232,22 +267,13 @@ const ShootingStarCanvas: React.FC<Props> = ({
 
         const tx = headX - Math.cos(s.ang) * tailLen;
         const ty = headY - Math.sin(s.ang) * tailLen;
-
         const STAR_RGB = starRgbRef.current;
 
-        // Gradientes
         const gradSoft = ctx.createLinearGradient(tx, ty, headX, headY);
         gradSoft.addColorStop(0.00, rgba(STAR_RGB, 0));
         gradSoft.addColorStop(0.55, rgba(STAR_RGB, 0.18 * a));
         gradSoft.addColorStop(0.90, rgba(STAR_RGB, 0.35 * a));
         gradSoft.addColorStop(1.00, rgba(STAR_RGB, 0.55 * a));
-
-        const gradCore = ctx.createLinearGradient(tx, ty, headX, headY);
-        gradCore.addColorStop(0.00, rgba(STAR_RGB, 0));
-        gradCore.addColorStop(0.75, rgba(STAR_RGB, 0.45 * a));
-        gradCore.addColorStop(1.00, rgba(STAR_RGB, 0.95 * a));
-
-        // Estela suavizada
         ctx.save();
         ctx.strokeStyle = gradSoft;
         ctx.lineWidth = tailSoftWidth;
@@ -259,7 +285,10 @@ const ShootingStarCanvas: React.FC<Props> = ({
         ctx.stroke();
         ctx.restore();
 
-        // Core
+        const gradCore = ctx.createLinearGradient(tx, ty, headX, headY);
+        gradCore.addColorStop(0.00, rgba(STAR_RGB, 0));
+        gradCore.addColorStop(0.75, rgba(STAR_RGB, 0.45 * a));
+        gradCore.addColorStop(1.00, rgba(STAR_RGB, 0.95 * a));
         ctx.save();
         ctx.strokeStyle = gradCore;
         ctx.lineWidth = tailCoreWidth;
@@ -270,7 +299,6 @@ const ShootingStarCanvas: React.FC<Props> = ({
         ctx.stroke();
         ctx.restore();
 
-        // Sombra Punta
         const haloR = headRadius * 3;
         const headGrad = ctx.createRadialGradient(headX, headY, 0, headX, headY, haloR);
         headGrad.addColorStop(0.00, rgba(STAR_RGB, 0.95 * a));
@@ -281,7 +309,6 @@ const ShootingStarCanvas: React.FC<Props> = ({
         ctx.arc(headX, headY, haloR, 0, Math.PI * 2);
         ctx.fill();
 
-        // Punta
         ctx.fillStyle = rgba(STAR_RGB, 0.95 * a);
         ctx.beginPath();
         ctx.arc(headX, headY, headRadius, 0, Math.PI * 2);
@@ -292,15 +319,35 @@ const ShootingStarCanvas: React.FC<Props> = ({
       raf.current = requestAnimationFrame(loop);
     };
 
+    const onVisibility = () => {
+      if (!pauseOnHidden) return;
+      if (document.hidden) {
+        stopped = true;
+        cancelAnimationFrame(raf.current);
+      } else if (stopped) {
+        stopped = false;
+        const now = performance.now();
+        raf.current = requestAnimationFrame((t) => {
+          // resetea last para evitar dt grande al volver
+          last = now;
+          loop(t);
+        });
+      }
+    };
+
+    if (pauseOnHidden) document.addEventListener("visibilitychange", onVisibility);
     raf.current = requestAnimationFrame(loop);
+
     return () => {
       cancelAnimationFrame(raf.current);
       window.removeEventListener("resize", onResize);
+      if (pauseOnHidden) document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [
     density, speed, twinkleDensity,
     growMin, growMax, delayMin, delayMax,
-    tailMin, tailMax, tailCoreWidth, tailSoftWidth, tailBlur, headRadius
+    tailMin, tailMax, tailCoreWidth, tailSoftWidth, tailBlur, headRadius,
+    mobileOverrides
   ]);
 
   return <Layer ref={ref} />;

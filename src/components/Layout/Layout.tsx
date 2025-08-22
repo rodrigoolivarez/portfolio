@@ -10,7 +10,7 @@ const RootContainer = muiStyled('div')({
   zIndex: 1,                     // contenido por encima del canvas
   width: '100%',
   minHeight: '100vh',
-  backgroundColor: 'transparent',// ¡clave!
+  backgroundColor: 'transparent',
   overflowX: 'hidden',
   display: 'flex',
   flexDirection: 'column',
@@ -22,8 +22,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <ShootingStarCanvas
-        
-        density={0.000033}
+        // Base (desktop)
+        density={0.000003}
         speed={200}
         twinkleDensity={0.00001}
         growMin={0.25}
@@ -34,9 +34,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         tailMax={130}
         tailCoreWidth={1}
         tailSoftWidth={4.5}
-        tailBlur={12}
+        tailBlur={10}           
         headRadius={1.8}
+        colorHex="#3FB950"
+        mobileOverrides={{
+          // si querés forzar tu propia detección:
+          // isMobilePredicate: () => window.innerWidth < 820,
+          dprCap: 1.3,           
+          densityFactor: 0.75,   
+          twinkleFactor: 0.7,    
+          speedFactor: 0.9,      
+          tailFactor: 0.9,       
+          respectSaveData: true, 
+          pauseOnHidden: true,   
+        }}
       />
+
       <RootContainer>
         <NavBar />
         <MainContent>{children}</MainContent>
