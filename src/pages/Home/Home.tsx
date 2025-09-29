@@ -44,6 +44,7 @@ const fadeIn = {
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  
 
   const techLogos = [
     { name: 'Javascript', icon: javascriptLogo },

@@ -11,8 +11,6 @@ import {
 import profilePic from "../../assets/profile.png";
 import { useTranslation } from 'react-i18next';
 
-
-
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -34,13 +32,13 @@ import angularIcon from "../../assets/Tecnologias/angular.svg";
 import canvaIcon from "../../assets/Tecnologias/canva.svg";
 import typescriptIcon from "../../assets/Tecnologias/typescript.svg";
 
-
-
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { CTAButton } from '../../styles/Global';
 
 export const AboutMe: React.FC = () => {
+  const { t } = useTranslation();
+
   const hardSkills = [
     { src: jsIcon, alt: "JavaScript" }, { src: reactIcon, alt: "React" },
     { src: typescriptIcon, alt: "TypeScript" }, { src: htmlIcon, alt: "HTML5" },
@@ -50,29 +48,7 @@ export const AboutMe: React.FC = () => {
     { src: mongodbIcon, alt: "MongoDB" }, { src: postmanIcon, alt: "Postman" },
     { src: gitIcon, alt: "Git" }, { src: githubIcon, alt: "GitHub" },
     { src: angularIcon, alt: "Angular" }, { src: canvaIcon, alt: "Canva" },
-
-
   ];
-
-  const personalInfo = {
-    greeting: "¡Hola! Soy Rodrigo,",
-    role: "un desarrollador web entusiasta de la tecnología. Me apasiona crear soluciones innovadoras y eficientes.",
-    p1: "Busco oportunidades para crecer y fortalecer mis habilidades. Me encanta aprender y enfrentar nuevos desafíos.",
-    p2: "Mis fortalezas incluyen la resolución de problemas, la atención al detalle y la capacidad de trabajar en equipo. Estoy emocionado por contribuir a proyectos que marquen el futuro.",
-  };
-
-  const educationInfo = {
-    degree: "Desarrollo web full stack",
-    institution: "Fundación Banco Nación | Educación IT | Fundación Pescar",
-    period: "Febrero 2025 - Presente(237hs)",
-  };
-
-  const experienceInfo = {
-    role: "Desarrollador front end",
-    company: "Freelance",
-    period: "Julio 2024 - Presente",
-    location: "Buenos Aires, Argentina",
-  };
 
   const [textRef, textInView] = useInView({ triggerOnce: true, threshold: 0.2 });
   const [skillsRef, skillsInView] = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -88,29 +64,25 @@ export const AboutMe: React.FC = () => {
             animate={textInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h2>Sobre mí</h2>
-            <p>{personalInfo.greeting} {personalInfo.role}</p>
-            <p style={{ marginTop: "1.5rem", marginBottom: "1.5rem" }}>{personalInfo.p1}</p>
-            <p>{personalInfo.p2}</p>
+            <h2>{t('about.title')}</h2>
+            <p>{t('about.greeting')} {t('about.role')}</p>
+            <p style={{ marginTop: "1.5rem", marginBottom: "1.5rem" }}>{t('about.p1')}</p>
+            <p>{t('about.p2')}</p>
 
-            {educationInfo.degree && (
-              <div className="education" style={{ marginTop: "2rem" }}>
-                <h3>Educación:</h3>
-                <h4>{educationInfo.degree}</h4>
-                <p>{educationInfo.institution}</p>
-                <p>{educationInfo.period}</p>
-              </div>
-            )}
+            <div className="education" style={{ marginTop: "2rem" }}>
+              <h3>{t('about.education')}:</h3>
+              <h4>{t('about.degree')}</h4>
+              <p>{t('about.institution')}</p>
+              <p>{t('about.periodEdu')}</p>
+            </div>
 
-            {experienceInfo.role && (
-              <div className="experience" style={{ marginTop: "2rem" }}>
-                <h3>Experiencia:</h3>
-                <h4>{experienceInfo.role}</h4>
-                <p>{experienceInfo.company}</p>
-                <p>{experienceInfo.period}</p>
-                <p>{experienceInfo.location}</p>
-              </div>
-            )}
+            <div className="experience" style={{ marginTop: "2rem" }}>
+              <h3>{t('about.experience')}:</h3>
+              <h4>{t('about.roleExp')}</h4>
+              <p>{t('about.companyExp')}</p>
+              <p>{t('about.periodExp')}</p>
+              <p>{t('about.locationExp')}</p>
+            </div>
           </motion.div>
 
           <motion.div
@@ -119,7 +91,7 @@ export const AboutMe: React.FC = () => {
             animate={skillsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <SkillsTitle component="h3">Mis Habilidades Principales</SkillsTitle>
+            <SkillsTitle component="h3">{t('about.skillsTitle')}</SkillsTitle>
             <HardSkillsContainer>
               {hardSkills.map((skill, index) => (
                 <HabilityItem key={skill.alt}>
@@ -143,8 +115,7 @@ export const AboutMe: React.FC = () => {
             animate={imageInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <img src={profilePic} alt="Rodrigo Olivarez" />
-
+            <img src={profilePic} alt={t('nav.about')} />
 
             <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem' }}>
               <CTAButton as="a" href="https://www.linkedin.com/in/rodrigoolivarez/" target="_blank" rel="noopener noreferrer">
@@ -156,7 +127,6 @@ export const AboutMe: React.FC = () => {
               <CTAButton as="a" href="https://www.instagram.com/rodrigolivarez/" target="_blank" rel="noopener noreferrer">
                 <InstagramIcon />
               </CTAButton>
-
             </div>
           </motion.div>
         </AboutImageContainer>
