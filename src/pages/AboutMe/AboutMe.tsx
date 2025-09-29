@@ -9,6 +9,7 @@ import {
   HabilityItem
 } from "./styles";
 import profilePic from "../../assets/profile.png";
+import { useTranslation } from 'react-i18next';
 
 
 

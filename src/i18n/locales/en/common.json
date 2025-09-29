@@ -15,6 +15,7 @@
         "learnMore": "Learn more",
         "certs": "Certificates"
     },
+
     "about": {
         "title": "About me",
         "greeting": "Hi! I'm Rodrigo,",
@@ -25,10 +26,10 @@
         "experience": "Experience",
         "degree": "Full-stack Web Development",
         "institution": "Fundación Banco Nación | Educación IT | Fundación Pescar",
-        "periodEdu": "Feb 2025 – Present (237h)",
+        "periodEdu": "Feb 2025 - Present (237h)",
         "roleExp": "Front-end Developer",
         "companyExp": "Freelance",
-        "periodExp": "Jul 2024 – Present",
+        "periodExp": "Jul 2024 - Present",
         "locationExp": "Buenos Aires, Argentina",
         "skillsTitle": "Main Skills"
     },
