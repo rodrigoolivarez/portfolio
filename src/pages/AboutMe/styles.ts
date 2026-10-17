@@ -1,215 +1,351 @@
-import styled from "styled-components";
-import { Box, Typography } from "@mui/material";
-import type { TypographyProps } from "@mui/material/Typography";
+import styled, { keyframes } from "styled-components";
+import { hudFrame } from "../../styles/Global";
 
-interface StyledTypographyProps extends TypographyProps {
-  component?: React.ElementType;
-}
-
-
-export const AboutPageContainer = styled(Box).attrs({ component: 'section' })`
-  padding: 2rem;
-  background-color: color-mix(in srgb, var(--color-bg-dark-deep) 50%, transparent);
-  backdrop-filter: blur(0.5px);
-  color: var(--color-text-light-primary);
-  @media (max-width: 600px) {
-    padding: 1.2rem;
-  }
-`;
-
-
-export const SectionHeading = styled(Typography)<StyledTypographyProps>`
-  font-size: 2.5rem !important;
-  font-weight: 600 !important;
-  color: var(--color-accent-secondary) !important;
-  text-align: center;
-  margin-bottom: 3rem !important;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-
-  @media (max-width: 600px) {
-    font-size: 2rem !important;
-  }
-`;
-
-
-export const AboutContentGrid = styled(Box)`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+export const AboutPageContainer = styled.section`
   width: 100%;
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+  color: var(--color-text-light-primary);
 
-  @media (min-width: 960px) {
-    grid-template-columns: 1.5fr 1fr;
-    gap: 4rem;
+  @media (max-width: 480px) {
+    padding: 2rem 1rem 4rem;
   }
 `;
 
-export const AboutTextContent = styled(Box)`
-  h2 {
-    font-size: 2.2rem !important;
-    font-weight: 600 !important;
-    color: var(--color-text-light-primary) !important;
-    margin-bottom: 1.5rem !important;
-    border-bottom: 2px solid var(--color-accent-secondary);
-    display: inline-block;
-    padding-bottom: 0.3rem;
+export const Layout = styled.div`
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 1.75rem;
+  margin-top: 3rem;
+  align-items: start;
 
-    @media (max-width: 600px) {
-      font-size: 1.6rem !important;
-      text-align: center;
-    }
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    min-width: 0;
   }
 
-  p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--color-text-light-secondary);
-    margin-bottom: 1.2rem;
-    letter-spacing: 0.03rem;
-    font-weight: 400;
-
-    @media (max-width: 600px) {
-      font-size: 0.95rem;
-      text-align: justify;
-    }
+  /* La ficha acompaña el scroll en escritorio */
+  aside {
+    position: sticky;
+    top: 6rem;
   }
 
-  .education,
-  .experience {
-    margin-top: 2.5rem;
-    padding-left: 1.5rem;
-    border-left: 3px solid var(--color-accent-secondary);
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
 
-    @media (max-width: 600px) {
-      padding-left: 1rem;
-      border-left: 2px solid var(--color-accent-secondary);
-    }
-
-    h3 {
-      font-size: 1.3rem !important;
-      font-weight: 600 !important;
-      color: var(--color-accent-secondary) !important;
-      margin-bottom: 0.8rem !important;
-    }
-
-    h4 {
-      font-size: 1.1rem !important;
-      font-weight: 500 !important;
-      color: var(--color-text-light-primary) !important;
-      margin-bottom: 0.3rem !important;
-
-      @media (max-width: 600px) {
-        font-size: 1rem !important;
-      }
-    }
-
-    p {
-      font-size: 0.95rem !important;
-      color: var(--color-text-light-secondary) !important;
-      margin-bottom: 0.3rem !important;
-      line-height: 1.5;
-      font-weight: 400;
-
-      @media (max-width: 600px) {
-        font-size: 0.9rem !important;
-      }
+    aside {
+      position: static;
     }
   }
 `;
 
+export const Panel = styled.div`
+  ${hudFrame}
+  border: 1px solid var(--color-border-primary);
+  border-radius: 4px;
+  padding: 1.5rem;
 
-export const SkillsTitle = styled(Typography)<StyledTypographyProps>`
-  display: inline-block;
-  font-size: 1.4rem !important;
-  font-weight: 600 !important;
-  color: var(--color-text-light-primary) !important;
-  border-bottom: 2px solid var(--color-accent-secondary);
-  margin-top: 3rem !important;
-  margin-bottom: 1.5rem !important;
-
-  @media (max-width: 600px) {
-    font-size: 1.2rem !important;
-    text-align: center;
+  @media (max-width: 480px) {
+    padding: 1.1rem;
   }
 `;
 
-
-export const HardSkillsContainer = styled(Box)`
-  margin-top: 1.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
+export const PanelTitle = styled.h2`
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border-primary);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent-secondary);
 `;
 
-export const HabilityItem = styled(Box)`
+/* ---------- Ficha del piloto ---------- */
+
+export const PilotCard = styled(Panel)`
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  gap: 0.35rem;
 
-  img {
-    width: 3.8rem;
-    height: 3.8rem;
-    object-fit: contain;
-    transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out, opacity 0.2s ease-in-out;
-    /* Tinte + desaturación inicial */
-    filter: var(--tech-filter) grayscale(30%);
-    opacity: 0.9;
-    will-change: transform, filter;
+  .tag {
+    align-self: stretch;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-light-tertiary);
+  }
 
-    &:hover {
-      transform: scale(1.15);
-      filter: var(--tech-filter-hover) grayscale(0%);
-      opacity: 1;
-    }
+  h2 {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
 
-    @media (max-width: 480px) {
-      width: 2.8rem;
-      height: 2.8rem;
-    }
+  .role {
+    color: var(--color-accent-secondary);
+    font-weight: 500;
+  }
+
+  .base {
+    font-size: 0.85rem;
+    color: var(--color-text-light-tertiary);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+
+  .links a {
+    padding: 0.75rem 1rem;
   }
 `;
 
+const spin = keyframes`
+  to { transform: rotate(360deg); }
+`;
 
-export const AboutImageContainer = styled(Box)`
-  text-align: center;
-  padding-top: 1rem;
-  margin-bottom: 2rem;
+/** Retrato en marco holográfico: dos anillos que giran en sentidos opuestos */
+export const Portrait = styled.div`
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-top: 1.25rem;
 
   img {
-    width: 400px;
-    height: 400px;
-    max-width: 100%;
-    object-fit: cover;
+    position: absolute;
+    inset: 14px;
+    width: calc(100% - 28px);
+    height: calc(100% - 28px);
     border-radius: 50%;
-    border: 3px solid var(--color-accent-primary);
-    box-shadow: 0 4px 15px rgba(var(--color-accent-primary-rgb, 88, 166, 255), 0.3);
-    filter: grayscale(0%);
-    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(var(--color-accent-primary-rgb, 88, 166, 255), 0.4);
-    }
+    object-fit: cover;
+    object-position: center 20%;
+    border: 1px solid var(--color-accent-secondary);
+    box-shadow: 0 0 30px var(--color-accent-soft);
   }
 
-  @media (max-width: 959px) {
-    order: -1;
-    img {
-      width: 250px;
-      height: 250px;
-    }
+  .ring {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    border: 1px dashed color-mix(in srgb, var(--color-accent-secondary) 60%, transparent);
+    animation: ${spin} 30s linear infinite;
   }
 
-  @media (max-width: 480px) {
-    img {
-      width: 150px;
-      height: 150px;
-    }
+  .ring.outer {
+    inset: -6px;
+    border: 1px solid transparent;
+    border-top-color: var(--color-accent-secondary);
+    border-right-color: color-mix(in srgb, var(--color-accent-secondary) 30%, transparent);
+    animation-duration: 12s;
+    animation-direction: reverse;
+  }
+`;
+
+export const Attributes = styled.div`
+  align-self: stretch;
+  margin-top: 1.25rem;
+  text-align: left;
+
+  .label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-light-tertiary);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  && li {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-accent-secondary);
+    background: var(--color-accent-soft);
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  }
+`;
+
+/* ---------- Bio ---------- */
+
+export const Bio = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-text-light-secondary);
+  }
+
+  p:first-child {
+    font-size: 1.08rem;
+    color: var(--color-text-light-primary);
+  }
+`;
+
+/* ---------- Bitácora de vuelo ---------- */
+
+export const QuestLog = styled.ol`
+  && {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding-left: 1.75rem;
+  }
+
+  /* Hilo del camino */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0.45rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: linear-gradient(var(--color-accent-secondary), transparent);
+  }
+`;
+
+export const Quest = styled.li`
+  && {
+    position: relative;
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-primary);
+  }
+
+  /* Marcador en forma de rombo sobre el hilo */
+  &::before {
+    content: "";
+    position: absolute;
+    left: -1.62rem;
+    top: 1.35rem;
+    width: 9px;
+    height: 9px;
+    transform: rotate(45deg);
+    background: var(--color-accent-secondary);
+    box-shadow: 0 0 10px var(--color-accent-glow);
+  }
+
+  .chapter {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent-secondary);
+  }
+
+  h3 {
+    margin: 0.3rem 0 0.35rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-light-primary);
+  }
+
+  .meta {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--color-text-light-secondary);
+  }
+
+  .status {
+    display: inline-block;
+    margin-top: 0.6rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-accent-secondary);
+    background: var(--color-accent-soft);
+  }
+
+  &.locked {
+    border-style: dashed;
+    background: transparent;
+  }
+
+  &.locked::before {
+    background: transparent;
+    border: 1px solid var(--color-accent-secondary);
+    box-shadow: none;
+  }
+
+  &.locked .status {
+    color: var(--color-accent-warm);
+    background: transparent;
+    border: 1px solid currentColor;
+  }
+`;
+
+/* ---------- Módulos instalados ---------- */
+
+export const ModuleGroups = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  h3 {
+    margin-bottom: 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-light-tertiary);
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+  }
+
+  && li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-text-light-primary);
+    border: 1px solid var(--color-border-primary);
+    background: color-mix(in srgb, var(--color-bg-dark-deep) 40%, transparent);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  && li:hover {
+    border-color: var(--color-accent-secondary);
+    background: var(--color-accent-soft);
+  }
+
+  img {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: var(--tech-filter);
   }
 `;

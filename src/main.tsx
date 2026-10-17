@@ -6,10 +6,8 @@ import App from './App';
 import { GlobalStyle } from './styles/Global';
 import "./i18n";
 import './index.css';
-import "animate.css/animate.min.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { ColorModeProvider, useColorMode } from './contexts/ColorModeContext';
+import { MotionProvider } from './contexts/MotionContext';
 
 const WithTheme: React.FC<{children: React.ReactNode}> = ({ children }) => {
   const { theme } = useColorMode();
@@ -20,11 +18,13 @@ const rootElement = document.getElementById('root')!;
 createRoot(rootElement).render(
   <StrictMode>
     <ColorModeProvider>
+      <MotionProvider>
       <WithTheme>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </WithTheme>
+      </MotionProvider>
     </ColorModeProvider>
   </StrictMode>
 );

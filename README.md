@@ -1,54 +1,69 @@
-# React + TypeScript + Vite
+# Rodrigo Olivarez · Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio personal de **Rodrigo Olivarez**, desarrollador web Full Stack (Buenos Aires, Argentina).
+Bilingüe (ES / EN), con modo claro/oscuro y un fondo animado de estrellas hecho a mano con Canvas API.
 
-Currently, two official plugins are available:
+🔗 **Demo:** https://portfolio-git-main-rodrigos-projects-28a435d7.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Stack
 
-## Expanding the ESLint configuration
+- **React 19 + TypeScript** con **Vite**
+- **MUI** y **styled-components** para UI y estilos (tokens en variables CSS)
+- **framer-motion** para animaciones de entrada
+- **i18next** para internacionalización (español / inglés)
+- **react-hook-form + EmailJS + reCAPTCHA** en el formulario de contacto
+- Deploy en **Vercel**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Lo destacable
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Salto hiperespacial** (`src/components/Galaxy/`): todo el sitio vive dentro de una galaxia espiral en WebGL
+  (three.js + shaders propios, hasta 45k partículas). Cada sección es una "estación": al navegar, la cámara
+  hace un salto con estelas, cambio de FOV y destello. Hay intro de arranque, HUD de coordenadas y, en modo claro,
+  una "carta estelar" en tinta sobre pergamino.
+  En el centro, **Gargantúa**: un agujero negro con trazado de rayos relativista (la luz se curva con la gravedad
+  y el disco de acreción se envuelve alrededor de la sombra, como en Interstellar).
+  Se carga en diferido, dibuja a 30 fps en reposo (60 durante los saltos), baja la calidad sola si el equipo no llega,
+  respeta `prefers-reduced-motion` (sin saltos ni intro; el gas sigue fluyendo más lento)
+  y usa el fondo 2D (`ShootingStarCanvas`) cuando no hay WebGL o está activo el ahorro de datos.
+- **Concepto "Noche dorada"**: un cielo nocturno donde cada constelación es parte de mi camino.
+  En el hero, las constelaciones (`src/components/Home/Constellations.tsx`) se trazan de a una estrella,
+  reaccionan al cursor y llevan a cada proyecto. Son links reales, así que funcionan con teclado y lector de pantalla.
+- **Bitácora de vuelo**: la experiencia y la formación como una línea de tiempo de misiones.
+- **Fondo de estrellas propio** (`src/components/Background/ShootingStarCanvas.tsx`):
+  un solo canvas sin `shadowBlur`, sprite pre-renderizado para el brillo, FPS limitado en móviles,
+  calidad adaptativa si el dispositivo no llega, pausa con la pestaña oculta y soporte de
+  `prefers-reduced-motion`.
+- **Code splitting por ruta**: las páginas secundarias (y reCAPTCHA / EmailJS) se cargan bajo demanda.
+- **Accesibilidad**: navegación por teclado, `skip link`, foco visible, `aria-*` en menú y modal.
+- **Tema sin parpadeo**: el modo claro/oscuro se aplica antes del primer pintado.
+
+## Correr en local
+
+```bash
+npm install
+cp .env.example .env   # completar las claves de EmailJS y reCAPTCHA
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| Script            | Qué hace                         |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Servidor de desarrollo           |
+| `npm run build`   | Build de producción en `dist/`   |
+| `npm run preview` | Sirve el build localmente        |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Estructura
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
+src/
+├── components/   # NavBar, Footer, Layout, Modal, fondo animado, carrusel
+├── pages/        # Home, Sobre mí, Proyectos, Contacto
+├── contexts/     # Tema claro/oscuro
+├── i18n/         # Traducciones ES / EN
+└── styles/       # Estilos globales
+```
+
+## Contacto
+
+- LinkedIn: [rodrigoolivarez](https://www.linkedin.com/in/rodrigoolivarez/)
+- GitHub: [rodrigoolivarez](https://github.com/rodrigoolivarez)
+- Email: rodrigovolivarez@gmail.com

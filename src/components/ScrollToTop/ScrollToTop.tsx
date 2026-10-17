@@ -11,7 +11,7 @@ const ScrollToTop: React.FC = () => {
         left: 0,
         behavior: 'auto'
       });
-    } catch (error) {
+    } catch {
       window.scrollTo(0, 0);
     }
   }, [pathname]); 

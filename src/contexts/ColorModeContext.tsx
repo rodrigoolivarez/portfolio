@@ -14,20 +14,20 @@ export const useColorMode = () => useContext(ColorModeContext);
 
 const lightPalette = {
   mode: "light" as const,
-  primary: { main: "#016fb9" },
-  secondary: { main: "#2e7d32" },
-  background: { default: "#f5f7fb", paper: "#ffffff" },
-  text: { primary: "#0A0D12", secondary: "#344054", disabled: "#98A2B3" },
-  divider: "#E5E7EB",
+  primary: { main: "#2B4C9B" },
+  secondary: { main: "#8E6118" },
+  background: { default: "#F5EFE3", paper: "#FBF7EF" },
+  text: { primary: "#1C2541", secondary: "#464C63", disabled: "#9A9AA8" },
+  divider: "#DCCFB6",
 };
 
 const darkPalette = {
   mode: "dark" as const,
-  primary: { main: "#58A6FF" },
-  secondary: { main: "#3FB950" },
-  background: { default: "#0D1117", paper: "#161B22" },
-  text: { primary: "#E6EDF3", secondary: "#B0BAC6", disabled: "#7D8590" },
-  divider: "#30363D",
+  primary: { main: "#A9BFFF" },
+  secondary: { main: "#D4A85A" },
+  background: { default: "#070A14", paper: "#141A2E" },
+  text: { primary: "#ECE6D9", secondary: "#B9B3A6", disabled: "#847F76" },
+  divider: "#2A3352",
 };
 
 function createMuiTheme(mode: Mode) {
@@ -51,15 +51,12 @@ function applyCssVars(mode: Mode) {
 }
 
 export const ColorModeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [mode, setMode] = useState<Mode>(() => (localStorage.getItem("mode") as Mode) || "dark");
-
-  useEffect(() => {
-    // preferencia del SO la primera vez
-    if (!localStorage.getItem("mode")) {
-      const prefersLight = window.matchMedia?.("(prefers-color-scheme: light)").matches;
-      setMode(prefersLight ? "light" : "dark");
-    }
-  }, []);
+  // Misma lógica que el script de index.html: guardado > preferencia del SO
+  const [mode, setMode] = useState<Mode>(() => {
+    const saved = localStorage.getItem("mode");
+    if (saved === "light" || saved === "dark") return saved;
+    return window.matchMedia?.("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  });
 
   useEffect(() => {
     localStorage.setItem("mode", mode);

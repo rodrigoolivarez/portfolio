@@ -1,50 +1,45 @@
 import React from "react";
-import { IconButton, Menu, MenuItem, ListItemIcon, ListItemText, Tooltip } from "@mui/material";
-import i18n from "../../i18n";
+import { Button, Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 type Lang = "es" | "en";
 
-const Flag: React.FC<{ code: Lang }> = ({ code }) => (
-  <span style={{ fontSize: 18, lineHeight: 1 }}>
-    {code === "es" ? "🇪🇸" : "🇬🇧"}
-  </span>
-);
-
+/**
+ * Alterna ES / EN. Se usan códigos en texto en lugar de banderas emoji:
+ * Windows no renderiza banderas emoji (se ven como "ES" / "GB" sueltas).
+ */
 const LangFlagSelect: React.FC = () => {
-  const initial: Lang = i18n.language.startsWith("en") ? "en" : "es";
-  const [lang, setLang] = React.useState<Lang>(initial);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { i18n } = useTranslation();
+  const lang: Lang = i18n.language?.startsWith("en") ? "en" : "es";
+  const next: Lang = lang === "es" ? "en" : "es";
 
-  const open = Boolean(anchorEl);
-  const handleOpen = (e: React.MouseEvent<HTMLElement>) => setAnchorEl(e.currentTarget);
-  const handleClose = () => setAnchorEl(null);
-
-  const change = (v: Lang) => {
-    setLang(v);
-    i18n.changeLanguage(v);
-    localStorage.setItem("i18nextLng", v);
-    handleClose();
+  const change = () => {
+    i18n.changeLanguage(next);
   };
 
   return (
-    <>
-      <Tooltip title={lang === "es" ? "Español" : "English"}>
-        <IconButton onClick={handleOpen} color="inherit" size="small" aria-label="change language">
-          <Flag code={lang} />
-        </IconButton>
-      </Tooltip>
-
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem onClick={() => change("es")} selected={lang === "es"}>
-          <ListItemIcon><Flag code="es" /></ListItemIcon>
-          <ListItemText primary="Español" />
-        </MenuItem>
-        <MenuItem onClick={() => change("en")} selected={lang === "en"}>
-          <ListItemIcon><Flag code="en" /></ListItemIcon>
-          <ListItemText primary="English" />
-        </MenuItem>
-      </Menu>
-    </>
+    <Tooltip title={next === "en" ? "Switch to English" : "Cambiar a español"}>
+      <Button
+        onClick={change}
+        size="small"
+        aria-label={next === "en" ? "Switch to English" : "Cambiar a español"}
+        sx={{
+          minWidth: 0,
+          px: 1,
+          fontFamily: "var(--font-display)",
+          fontWeight: 600,
+          fontSize: "0.8rem",
+          color: "var(--color-text-light-secondary)",
+          backgroundColor: "transparent",
+          borderRadius: "8px",
+          "&:hover": { color: "var(--color-accent-secondary)", backgroundColor: "var(--color-accent-soft)", filter: "none" },
+        }}
+      >
+        <span style={{ color: "var(--color-accent-secondary)" }}>{lang.toUpperCase()}</span>
+        <span style={{ opacity: 0.5, margin: "0 2px" }}>/</span>
+        {next.toUpperCase()}
+      </Button>
+    </Tooltip>
   );
 };
 

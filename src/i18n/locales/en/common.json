@@ -1,72 +1,182 @@
 {
-    "nav": {
-        "home": "Home",
-        "about": "About",
-        "projects": "Projects",
-        "contact": "Contact"
-    },
-    "home": {
-        "title": "<Rodrigo Olivarez/>",
-        "role": "Full Stack Web Developer",
-        "desc": "Turning ideas into intuitive, scalable digital experiences.",
-        "seeProjects": "See Projects",
-        "whoAmI": "Who am I?",
-        "whoAmIDesc": "Passionate about technology and web development, focused on performance, usability and clean code.",
-        "learnMore": "Learn more",
-        "certs": "Certificates"
-    },
-
-    "about": {
-        "title": "About me",
-        "greeting": "Hi! I'm Rodrigo,",
-        "role": "a web developer passionate about technology. I love building innovative and efficient solutions.",
-        "p1": "I'm looking for opportunities to grow and strengthen my skills.",
-        "p2": "My strengths include problem-solving, attention to detail and teamwork.",
-        "education": "Education",
-        "experience": "Experience",
-        "degree": "Full-stack Web Development",
-        "institution": "Fundación Banco Nación | Educación IT | Fundación Pescar",
-        "periodEdu": "Feb 2025 - Present (237h)",
-        "roleExp": "Front-end Developer",
-        "companyExp": "Freelance",
-        "periodExp": "Jul 2024 - Present",
-        "locationExp": "Buenos Aires, Argentina",
-        "skillsTitle": "Main Skills"
-    },
-    "projects": {
-        "featured": "Featured Projects",
-        "demo": "Live Demo",
-        "code": "Code",
-        "items": {
-            "portfolio": {
-                "title": "Personal Portfolio",
-                "desc": "My personal portfolio built with React and TypeScript. Responsive design and a highlighted projects section."
-            },
-            "atm": {
-                "title": "ATM Simulator",
-                "desc": "My first React project. Simulates an ATM (balance check and withdrawal) using local storage. Fully responsive. Enter PIN 1-6"
-            },
-            "empredemia": {
-                "title": "Empredemia",
-                "desc": "Course platform for entrepreneurs. Worked on React-Typescript, with NodeJS, MongoDB-Atlas for database (local-cloud) and JWTtoken-Bcrypt for validations and passwords"
-            }
-        }
-    },
-    "contact": {
-        "title": "Contact",
-        "lead1": "I’m always looking for new challenges and opportunities to build innovative web solutions.",
-        "lead2": "If you have an idea or a project, feel free to send me a message!",
-        "email": "Email",
-        "name": "Name",
-        "message": "Message",
-        "send": "Send",
-        "statusSuccess": "Message sent successfully!",
-        "statusError": "Error sending the message. Try again.",
-        "captcha": "Please complete the reCAPTCHA.",
-        "location": "Location",
-        "errors": {
-            "required": "This field is required",
-            "invalidEmail": "Invalid email"
-        }
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "skip": "Skip to content",
+    "menu": "Open menu",
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode",
+    "motionOn": "Enable animations",
+    "motionOff": "Reduce animations"
+  },
+  "home": {
+    "role": "Full Stack Web Developer",
+    "desc": "I build web experiences step by step, with the persistence of someone who never leaves a quest half done.",
+    "seeProjects": "See Projects",
+    "whoAmI": "Who am I?",
+    "whoAmIDesc": "Passionate about technology and web development, focused on performance, usability and clean code.",
+    "learnMore": "Learn more",
+    "certs": "Acquired knowledge",
+    "available": "Open to new opportunities",
+    "greeting": "Hi, I am",
+    "name": "Rodrigo Olivarez",
+    "contactMe": "Contact me",
+    "stackTitle": "Main technologies",
+    "viewCert": "View certificate",
+    "constHint": "Explore the sky: each constellation is part of my journey",
+    "constNav": "Constellation map",
+    "const": {
+      "empredemia": {
+        "name": "Empredemia",
+        "kind": "Full stack"
+      },
+      "portfolio": {
+        "name": "Portfolio",
+        "kind": "This site"
+      },
+      "atm": {
+        "name": "ATM",
+        "kind": "First project"
+      },
+      "constancy": {
+        "name": "Persistence",
+        "kind": "About me"
+      }
     }
+  },
+  "about": {
+    "title": "Pilot profile",
+    "greeting": "Hi! I'm Rodrigo,",
+    "role": "a web developer passionate about technology. I love building innovative and efficient solutions.",
+    "p1": "I'm looking for opportunities to grow and strengthen my skills.",
+    "p2": "My greatest strengths are consistency and perseverance: when something doesn't work, I keep trying until it does. I also bring problem-solving, attention to detail and teamwork.",
+    "education": "Education",
+    "experience": "Experience",
+    "degree": "Full-stack Web Development",
+    "institution": "Fundación Banco Nación | Educación IT | Fundación Pescar",
+    "periodEdu": "Feb 2025 - Present (237h)",
+    "roleExp": "Front-end Developer",
+    "companyExp": "Freelance",
+    "periodExp": "Jul 2024 - Present",
+    "locationExp": "Buenos Aires, Argentina",
+    "skillsTitle": "Installed modules",
+    "logTitle": "Flight log",
+    "chapter": "Chapter {{n}}",
+    "statusActive": "Quest in progress",
+    "statusLocked": "To be unlocked",
+    "nextQuest": "Next quest",
+    "nextQuestTitle": "Join a development team",
+    "nextQuestDesc": "Looking for my first trainee / junior role to keep growing alongside others.",
+    "sector": "Sector 01 · About me",
+    "lead": "Who's flying the ship: how I work, where I come from and where I'm heading.",
+    "pilotTag": "Profile · RO-01",
+    "photoAlt": "Photo of Rodrigo Olivarez",
+    "base": "Base: Buenos Aires, Argentina",
+    "attributes": "Core attributes",
+    "attr": {
+      "constancy": "Consistency",
+      "perseverance": "Perseverance",
+      "problemSolving": "Problem solving",
+      "teamwork": "Teamwork"
+    },
+    "bioTitle": "Who I am",
+    "groups": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Tools"
+    }
+  },
+  "projects": {
+    "featured": "Project cluster",
+    "demo": "Launch demo",
+    "code": "View code",
+    "items": {
+      "portfolio": {
+        "title": "Personal Portfolio",
+        "desc": "This very site: React + TypeScript with a WebGL galaxy (three.js and custom shaders), hyperspace jumps between sections, an Interstellar-inspired black hole, i18n and a focus on performance and accessibility.",
+        "type": "Personal site · WebGL"
+      },
+      "atm": {
+        "title": "ATM Simulator",
+        "desc": "My first React project. Simulates an ATM (balance check and withdrawal) using local storage. Fully responsive. Enter PIN 1-6",
+        "type": "Web simulator"
+      },
+      "empredemia": {
+        "title": "Empredemia",
+        "desc": "Course platform for entrepreneurs. Worked on React-Typescript, with NodeJS, MongoDB-Atlas for database (local-cloud) and JWTtoken-Bcrypt for validations and passwords",
+        "type": "Full stack platform"
+      }
+    },
+    "lead": "A selection of projects where I applied frontend, backend and UI best practices.",
+    "sector": "Sector 02 · Projects",
+    "listLabel": "Projects",
+    "dossier": "Dossier",
+    "typeLabel": "Type",
+    "statusLabel": "Status",
+    "modules": "Installed modules",
+    "status": {
+      "done": "Mission complete",
+      "orbit": "In orbit"
+    },
+    "signalHolo": "Signal · Hologram",
+    "signalRaw": "Signal · Original",
+    "viewRaw": "View original",
+    "viewHolo": "View hologram",
+    "leadOrbital": "Each planet is a project in orbit. Pick one to lock the signal and open its hologram.",
+    "systems": "Detected systems",
+    "explore": "Explore planet",
+    "closeSignal": "Close signal"
+  },
+  "contact": {
+    "title": "Relay station",
+    "email": "Email",
+    "name": "Name",
+    "message": "Message",
+    "send": "Transmit",
+    "statusSuccess": "Transmission received. I'll get back to you soon.",
+    "statusError": "The signal didn't get through. Try again or email me directly.",
+    "captcha": "Please complete the reCAPTCHA.",
+    "location": "Location",
+    "errors": {
+      "required": "This field is required",
+      "invalidEmail": "Invalid email"
+    },
+    "sector": "Sector 04 · Contact",
+    "lead": "If you have an idea, a project or an opening on your team, open a channel. I answer every transmission.",
+    "channels": "Direct channels",
+    "available": "Open to new opportunities",
+    "copy": "Copy",
+    "copied": "Copied",
+    "transmission": "New transmission",
+    "idKicker": "Identification",
+    "freqKicker": "Return frequency",
+    "msgKicker": "Message",
+    "namePh": "What's your name?",
+    "emailPh": "you@email.com",
+    "messagePh": "Tell me how I can help…",
+    "sending": "Sending signal…"
+  },
+  "footer": {
+    "built": "Built with React + TypeScript",
+    "social": "Social links"
+  },
+  "galaxy": {
+    "warping": "Jumping…",
+    "ready": "Jump drive ready",
+    "system": {
+      "intro": "Deep space",
+      "home": "Origin system",
+      "about": "Logbook system",
+      "projects": "Project cluster",
+      "contact": "Relay station"
+    },
+    "gateKicker": "Incoming transmission",
+    "gateLoading": "Locking coordinates",
+    "gateReady": "Coordinates locked",
+    "enter": "Start jump",
+    "skipIntro": "Enter without animation",
+    "reopen": "Back to the gate"
+  }
 }

@@ -2,12 +2,54 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Rodrigo Olivarez · Desarrollador Web Full Stack</title>
+    <meta
+      name="description"
+      content="Portfolio de Rodrigo Olivarez, desarrollador web Full Stack (React, TypeScript, Node.js, MongoDB) en Buenos Aires, Argentina."
+    />
+    <meta name="author" content="Rodrigo Olivarez" />
+    <meta name="theme-color" content="#070A14" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F5EFE3" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="/src/assets/RO.png" type="image/png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
+
+    <!-- Open Graph: vista previa al compartir el link (LinkedIn, WhatsApp, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Rodrigo Olivarez · Desarrollador Web Full Stack" />
+    <meta
+      property="og:description"
+      content="React, TypeScript, Node.js y MongoDB. Proyectos, certificados y contacto."
+    />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Aplica el tema antes de pintar para evitar el destello oscuro→claro -->
+    <script>
+      (function () {
+        try {
+          var m = localStorage.getItem("mode");
+          if (!m) m = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+          if (m === "light") document.documentElement.classList.add("light");
+          var mo = localStorage.getItem("motion");
+          var reduce = mo ? mo === "reduced" : window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          if (reduce) document.documentElement.classList.add("reduce-motion");
+          // Primera visita de la sesión: el portfolio espera detrás de la puerta de entrada
+          if (!reduce && !sessionStorage.getItem("galaxy-intro-seen")) document.documentElement.classList.add("intro-active");
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>Este portfolio necesita JavaScript para funcionar.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
