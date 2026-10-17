@@ -1,6 +1,35 @@
 // src/styles/Global.ts
-import { Button } from "@mui/material";
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, css } from "styled-components";
+
+/** Ornamento bajo los títulos: línea · estrella · línea, en dorado */
+export const titleOrnament = css`
+  &::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 9px;
+    margin: 0.75rem auto 0;
+    background:
+      radial-gradient(circle, var(--color-accent-secondary) 0 2.5px, transparent 3px) center / 9px 9px no-repeat,
+      linear-gradient(90deg, transparent, var(--color-accent-secondary)) left center / 46% 1px no-repeat,
+      linear-gradient(90deg, var(--color-accent-secondary), transparent) right center / 46% 1px no-repeat;
+  }
+`;
+
+/** Marco de panel holográfico: esquinas doradas + vidrio esmerilado liviano */
+export const hudFrame = css`
+  --corner: var(--color-accent-secondary);
+  background:
+    linear-gradient(var(--corner), var(--corner)) top left / 16px 1px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) top left / 1px 16px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) top right / 16px 1px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) top right / 1px 16px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) bottom left / 16px 1px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) bottom left / 1px 16px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) bottom right / 16px 1px no-repeat,
+    linear-gradient(var(--corner), var(--corner)) bottom right / 1px 16px no-repeat,
+    linear-gradient(180deg, var(--color-surface-hover), var(--color-surface));
+`;
 
 export const GlobalStyle = createGlobalStyle`
   /* NO variables ni tema acá: index.css es la fuente de verdad */
@@ -40,7 +69,7 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     cursor: pointer;
     background-color: var(--color-accent-secondary);
-    color: #fff;
+    color: var(--color-on-accent);
     border-radius: 2rem;
     font-weight: 500;
     transition: filter 0.25s;
@@ -61,22 +90,5 @@ export const GlobalStyle = createGlobalStyle`
     color: var(--color-accent-secondary);
   }
 
-  .is-hidden-until-animation { visibility: hidden; }
 `;
 
-export const CTAButton = styled(Button)`
-  margin-top: 1rem !important;
-  font-weight: bold !important;
-  text-transform: none !important;
-  padding: 0.75rem 1.5rem !important;
-  border-radius: 12px !important;
-  border-color: var(--color-accent-secondary) !important;
-  color: var(--color-accent-secondary) !important;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: var(--color-accent-secondary) !important;
-    color: #fff !important;
-    border-color: var(--color-accent-primary);
-  }
-`;

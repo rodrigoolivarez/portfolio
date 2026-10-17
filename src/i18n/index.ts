@@ -14,11 +14,19 @@ i18n
       en: { translation: en },
     },
     fallbackLng: "es",
+    supportedLngs: ["es", "en"],
+    nonExplicitSupportedLngs: true,
     interpolation: { escapeValue: false },
     detection: {
       order: ["localStorage", "navigator", "htmlTag"],
       caches: ["localStorage"],
     },
   });
+
+const syncHtmlLang = (lng: string) => {
+  document.documentElement.lang = lng.startsWith("en") ? "en" : "es";
+};
+syncHtmlLang(i18n.resolvedLanguage ?? i18n.language ?? "es");
+i18n.on("languageChanged", syncHtmlLang);
 
 export default i18n;

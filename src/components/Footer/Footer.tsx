@@ -1,4 +1,6 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { reopenGate } from '../Galaxy/gate';
 import {
   FooterContainer,
   FooterContent,
@@ -12,16 +14,21 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
     <FooterContainer>
       <FooterContent>
         <CopyrightText variant="body2">
-          &copy; {currentYear} Rodrigo Olivarez. Todos los derechos reservados.
+          &copy; {currentYear} Rodrigo Olivarez · {t('footer.built')}
         </CopyrightText>
 
-        <SocialIconsContainer aria-label="Redes sociales">
+        <button type="button" className="reopen-gate" onClick={reopenGate}>
+          ↺ {t('galaxy.reopen')}
+        </button>
+
+        <SocialIconsContainer aria-label={t('footer.social')}>
           <FooterIconButton
             component="a"
             href="https://github.com/rodrigoolivarez"

@@ -1,7 +1,10 @@
 :root {
-
-  --font-primary: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  /* Títulos: serif con aire épico, a tono con el tema espacial */
+  --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: dark;
   line-height: 1.6;
   font-weight: 400;
   font-synthesis: none;
@@ -9,18 +12,28 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-
-  --color-bg-dark-deep: #0D1117;
-  --color-bg-dark-primary: #161B22;
-  --color-bg-dark-secondary: #21262D;
-  --color-text-light-primary: #E6EDF3;
-  --color-text-light-secondary: #B0BAC6;
-  --color-text-light-tertiary: #7D8590;
-  --color-accent-primary: #58A6FF;
-  --color-accent-secondary: #3fb950;
-  --color-accent-hover: #79C0FF;
-  --color-border-primary: #30363D;
-  --color-border-secondary: #21262D;
+  /* Paleta "Noche dorada": azul noche + oro envejecido + brasa */
+  --color-bg-dark-deep: #070A14;
+  --color-bg-dark-primary: #141A2E;
+  --color-bg-dark-secondary: #1C2440;
+  --color-text-light-primary: #ECE6D9;
+  --color-text-light-secondary: #B9B3A6;
+  --color-text-light-tertiary: #847F76;
+  --color-accent-primary: #A9BFFF;   /* luz de luna: links y foco */
+  --color-accent-secondary: #D4A85A; /* oro envejecido: acento principal */
+  --color-accent-warm: #E07A4F;      /* brasa */
+  --color-accent-hover: #C8D6FF;
+  --color-on-accent: #1A1405;        /* texto sobre fondo dorado */
+  --color-border-primary: #2A3352;
+  --color-border-secondary: #1C2440;
+  --color-surface: rgba(20, 26, 46, 0.72);
+  --color-surface-hover: rgba(28, 36, 64, 0.85);
+  --color-header-bg: rgba(7, 10, 20, 0.8);
+  --color-accent-soft: rgba(212, 168, 90, 0.12);
+  --color-accent-glow: rgba(212, 168, 90, 0.35);
+  --color-sky-glow: rgba(80, 104, 190, 0.16);
+  --color-error: #F07B6A;
+  --color-success: #D4A85A;
 
   --shadow-color-rgb: 0, 0, 0;
   --shadow-elevation-low: 0 1px 2px rgba(var(--shadow-color-rgb), 0.1),
@@ -30,27 +43,38 @@
 
   --transition-fast: all 0.2s ease-in-out;
   --transition-medium: all 0.3s ease-in-out;
-  --tech-filter: invert(57%) sepia(100%) saturate(304%) hue-rotate(77deg) brightness(87%) contrast(94%);
-  --tech-filter-hover: invert(70%) sepia(63%) saturate(545%) hue-rotate(85deg) brightness(100%) contrast(98%);
-
+  /* Tiñe los íconos SVG de tecnologías en dorado */
+  --tech-filter: invert(74%) sepia(32%) saturate(620%) hue-rotate(358deg) brightness(90%) contrast(88%);
+  --tech-filter-hover: invert(84%) sepia(40%) saturate(700%) hue-rotate(350deg) brightness(102%) contrast(95%);
 }
 
+/* Modo claro: pergamino + tinta azul + bronce */
 :root.light {
-  --color-bg-dark-deep: #f5f7fb;
-  --color-bg-dark-primary: #ffffff;
-  --color-bg-dark-secondary: #f2f4f7;
-  --color-text-light-primary: #0A0D12;
-  --color-text-light-secondary: #344054;
-  --color-text-light-tertiary: #667085;
-  --color-accent-primary: #016fb9;
-  --color-accent-secondary: #2e7d32;
-  --color-accent-hover: #035ea0;
-  --color-border-primary: #E5E7EB;
-  --color-border-secondary: #EAECF0;
-  --tech-filter: invert(36%) sepia(49%) saturate(747%) hue-rotate(85deg) brightness(68%) contrast(93%);
-  --tech-filter-hover: invert(42%) sepia(78%) saturate(640%) hue-rotate(85deg) brightness(78%) contrast(96%);
+  --color-bg-dark-deep: #F5EFE3;
+  --color-bg-dark-primary: #FBF7EF;
+  --color-bg-dark-secondary: #EDE4D3;
+  --color-text-light-primary: #1C2541;
+  --color-text-light-secondary: #464C63;
+  --color-text-light-tertiary: #737689;
+  --color-accent-primary: #2B4C9B;
+  --color-accent-secondary: #8E6118;
+  --color-accent-warm: #B4532A;
+  --color-accent-hover: #1E3a7a;
+  --color-on-accent: #FFFFFF;
+  --color-border-primary: #DCCFB6;
+  --color-border-secondary: #E6DCC8;
+  --color-surface: rgba(251, 247, 239, 0.85);
+  --color-surface-hover: #FFFDF8;
+  --color-header-bg: rgba(245, 239, 227, 0.88);
+  --color-accent-soft: rgba(142, 97, 24, 0.1);
+  --color-accent-glow: rgba(142, 97, 24, 0.25);
+  --color-sky-glow: rgba(212, 168, 90, 0.18);
+  --color-error: #B3261E;
+  --color-success: #8E6118;
+  color-scheme: light;
+  --tech-filter: invert(36%) sepia(62%) saturate(640%) hue-rotate(10deg) brightness(88%) contrast(92%);
+  --tech-filter-hover: invert(30%) sepia(80%) saturate(700%) hue-rotate(12deg) brightness(80%) contrast(95%);
 }
-
 
 *,
 *::before,
@@ -84,4 +108,57 @@ a {
 
 a:hover {
   color: var(--color-accent-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-accent-secondary);
+  color: var(--color-on-accent);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 2000;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: var(--color-accent-secondary);
+  color: var(--color-on-accent);
+}
+
+.skip-link:focus {
+  top: 1rem;
+  color: var(--color-on-accent);
+}
+
+/* Movimiento reducido: lo decide MotionContext (preferencia del sistema o el interruptor de la barra) */
+:root.reduce-motion *,
+:root.reduce-motion *::before,
+:root.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+/* Puerta de entrada: el portfolio aparece recién después del primer salto */
+.app-shell {
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+:root.intro-active .app-shell {
+  opacity: 0;
+  transform: scale(0.97);
+  pointer-events: none;
+}
+
+:root.intro-active body {
+  overflow: hidden;
 }

@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import CloseIcon from '@mui/icons-material/Close'; 
+import CloseIcon from '@mui/icons-material/Close';
 
 const Backdrop = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.65);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,57 +15,83 @@ const Backdrop = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background: var(--color-background);
-  color: var(--color-text-primary);
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  max-width: 700px;
-  width: auto;
-  max-height: 85vh;
+  background: var(--color-bg-dark-primary);
+  color: var(--color-text-light-primary);
+  padding: 2.5rem 1.5rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-border-primary);
+  max-width: 760px;
+  width: 100%;
+  max-height: 88vh;
   overflow-y: auto;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
   position: relative;
 `;
 
 const CloseButton = styled.button`
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: transparent;
-  border: none;
-  color: var(--color-text-primary);
-  cursor: pointer;
-  font-size: 1.5rem;
+  && {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text-light-secondary);
+    font-size: 1.4rem;
 
-  &:hover {
-    color: var(--color-accent);
+    &:hover {
+      color: var(--color-accent-secondary);
+      background: var(--color-accent-soft);
+      filter: none;
+    }
   }
 `;
 
 type ModalProps = {
   onClose: () => void;
+  label?: string;
   children: React.ReactNode;
 };
 
-const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
-  const handleBackdropClick = () => {
-    onClose();
-  };
+const Modal: React.FC<ModalProps> = ({ onClose, label, children }) => {
+  const closeRef = useRef<HTMLButtonElement>(null);
 
-  const handleModalContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  };
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
 
-  return (
-    <Backdrop onClick={handleBackdropClick}>
-      <ModalContainer onClick={handleModalContentClick}>
-        <CloseButton onClick={onClose}>
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKey);
+
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+      previouslyFocused?.focus();
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <Backdrop onClick={onClose}>
+      <ModalContainer
+        role="dialog"
+        aria-modal="true"
+        aria-label={label}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <CloseButton ref={closeRef} onClick={onClose} aria-label="Cerrar / Close">
           <CloseIcon fontSize="inherit" />
         </CloseButton>
         {children}
       </ModalContainer>
-    </Backdrop>
+    </Backdrop>,
+    document.body
   );
 };
 

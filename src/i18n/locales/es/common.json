@@ -1,23 +1,57 @@
 {
-  "nav": { "home": "Inicio", "about": "Sobre Mí", "projects": "Proyectos", "contact": "Contacto" },
-
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre Mí",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "skip": "Saltar al contenido",
+    "menu": "Abrir menú",
+    "toLight": "Cambiar a modo claro",
+    "toDark": "Cambiar a modo oscuro",
+    "motionOn": "Activar animaciones",
+    "motionOff": "Reducir animaciones"
+  },
   "home": {
-    "title": "<Rodrigo Olivarez/>",
     "role": "Desarrollador Web Full Stack",
-    "desc": "Transformando ideas en experiencias digitales intuitivas y escalables.",
+    "desc": "Construyo experiencias web paso a paso, con la constancia de quien no deja una misión a medias.",
     "seeProjects": "Ver Proyectos",
     "whoAmI": "¿Quién soy?",
     "whoAmIDesc": "Apasionado por la tecnología y el desarrollo web, con enfoque en rendimiento, usabilidad y código limpio.",
     "learnMore": "Saber más",
-    "certs": "Certificados"
+    "certs": "Conocimiento adquirido",
+    "available": "Disponible para nuevas oportunidades",
+    "greeting": "Hola, soy",
+    "name": "Rodrigo Olivarez",
+    "contactMe": "Contactarme",
+    "stackTitle": "Tecnologías principales",
+    "viewCert": "Ver certificado",
+    "constHint": "Explorá el cielo: cada constelación es parte de mi camino",
+    "constNav": "Mapa de constelaciones",
+    "const": {
+      "empredemia": {
+        "name": "Empredemia",
+        "kind": "Full stack"
+      },
+      "portfolio": {
+        "name": "Portfolio",
+        "kind": "Este sitio"
+      },
+      "atm": {
+        "name": "Cajero",
+        "kind": "Primer proyecto"
+      },
+      "constancy": {
+        "name": "Constancia",
+        "kind": "Sobre mí"
+      }
+    }
   },
-
   "about": {
-    "title": "Sobre mí",
+    "title": "Ficha del piloto",
     "greeting": "¡Hola! Soy Rodrigo,",
     "role": "un desarrollador web entusiasta de la tecnología. Me apasiona crear soluciones innovadoras y eficientes.",
     "p1": "Busco oportunidades para crecer y fortalecer mis habilidades. Aprendiendo y enfrentándo nuevos desafíos en el proceso.",
-    "p2": "Mis fortalezas incluyen la resolución de problemas, la atención al detalle y la capacidad de trabajar en equipo.",
+    "p2": "Mis mayores fortalezas son la constancia y la perseverancia: cuando algo no sale, lo vuelvo a intentar hasta que sale. Sumo resolución de problemas, atención al detalle y trabajo en equipo.",
     "education": "Educación",
     "experience": "Experiencia",
     "degree": "Desarrollo web full stack",
@@ -27,44 +61,122 @@
     "companyExp": "Freelance",
     "periodExp": "Julio 2024 - Presente",
     "locationExp": "Buenos Aires, Argentina",
-    "skillsTitle": "Mis Habilidades Principales"
+    "skillsTitle": "Módulos instalados",
+    "logTitle": "Bitácora de vuelo",
+    "chapter": "Capítulo {{n}}",
+    "statusActive": "Misión en curso",
+    "statusLocked": "Por desbloquear",
+    "nextQuest": "Próxima misión",
+    "nextQuestTitle": "Sumarme a un equipo de desarrollo",
+    "nextQuestDesc": "Busco mi primer rol trainee / junior para seguir creciendo junto a otros.",
+    "sector": "Sector 01 · Sobre mí",
+    "lead": "Quién está detrás de la nave: cómo trabajo, de dónde vengo y hacia dónde voy.",
+    "pilotTag": "Ficha · RO-01",
+    "photoAlt": "Foto de Rodrigo Olivarez",
+    "base": "Base: Buenos Aires, Argentina",
+    "attributes": "Atributos principales",
+    "attr": {
+      "constancy": "Constancia",
+      "perseverance": "Perseverancia",
+      "problemSolving": "Resolución de problemas",
+      "teamwork": "Trabajo en equipo"
+    },
+    "bioTitle": "Quién soy",
+    "groups": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Herramientas"
+    }
   },
-
   "projects": {
-    "featured": "Proyectos Destacados",
-    "demo": "Ver Demo",
-    "code": "Código",
+    "featured": "Cúmulo de proyectos",
+    "demo": "Lanzar demo",
+    "code": "Ver código",
     "items": {
       "portfolio": {
         "title": "Portfolio Personal",
-        "desc": "Mi portfolio personal, desarrollado con React y TypeScript. Incluye un diseño responsivo y una sección de proyectos destacados."
+        "desc": "Este mismo sitio: React + TypeScript con una galaxia en WebGL (three.js y shaders propios), saltos hiperespaciales entre secciones, un agujero negro inspirado en Interstellar, i18n y foco en rendimiento y accesibilidad.",
+        "type": "Sitio personal · WebGL"
       },
       "atm": {
         "title": "Cajero Automático",
-        "desc": "Primer proyecto de React. Simula un cajero con consulta de saldo y retiro utilizando local storage. Diseño responsive. Introducir PIN 1-6"
+        "desc": "Primer proyecto de React. Simula un cajero con consulta de saldo y retiro utilizando local storage. Diseño responsive. Introducir PIN 1-6",
+        "type": "Simulador web"
       },
       "empredemia": {
         "title": "Empredemia",
-        "desc": "Plataforma de cursos para emprendedores. Trabajado en React-Typescript, junto con NodeJS, MongoDB-Atlas como base de datos (local-nube), JWTtoken-Bcrypt para validaciones y contraseñas."
+        "desc": "Plataforma de cursos para emprendedores. Trabajado en React-Typescript, junto con NodeJS, MongoDB-Atlas como base de datos (local-nube), JWTtoken-Bcrypt para validaciones y contraseñas.",
+        "type": "Plataforma full stack"
       }
-    }
+    },
+    "lead": "Una selección de proyectos donde apliqué frontend, backend y buenas prácticas de UI.",
+    "sector": "Sector 02 · Proyectos",
+    "listLabel": "Proyectos",
+    "dossier": "Dossier",
+    "typeLabel": "Tipo",
+    "statusLabel": "Estado",
+    "modules": "Módulos instalados",
+    "status": {
+      "done": "Misión completada",
+      "orbit": "En órbita"
+    },
+    "signalHolo": "Señal · Holograma",
+    "signalRaw": "Señal · Original",
+    "viewRaw": "Ver original",
+    "viewHolo": "Ver holograma",
+    "leadOrbital": "Cada planeta es un proyecto en órbita. Elegí uno para fijar la señal y abrir su holograma.",
+    "systems": "Sistemas detectados",
+    "explore": "Explorar planeta",
+    "closeSignal": "Cerrar señal"
   },
-
   "contact": {
-    "title": "Contacto",
-    "lead1": "Siempre estoy buscando nuevos desafíos y oportunidades para crear soluciones web innovadoras.",
-    "lead2": "Si tienes una idea, un proyecto, o buscas trabajar conmigo, ¡no dudes en enviarme un mensaje!",
+    "title": "Estación de enlace",
     "email": "Correo",
     "name": "Nombre",
     "message": "Mensaje",
-    "send": "Enviar",
-    "statusSuccess": "¡Mensaje enviado exitosamente!",
-    "statusError": "Error al enviar el mensaje. Intenta de nuevo.",
+    "send": "Transmitir",
+    "statusSuccess": "Transmisión recibida. Te respondo pronto.",
+    "statusError": "La señal no llegó. Probá de nuevo o escribime directo al correo.",
     "captcha": "Por favor, completa el reCAPTCHA.",
     "location": "Ubicación",
     "errors": {
       "required": "Este campo es obligatorio",
       "invalidEmail": "Correo inválido"
-    }
+    },
+    "sector": "Sector 04 · Contacto",
+    "lead": "Si tenés una idea, un proyecto o una vacante en tu equipo, abrí un canal. Respondo cada transmisión.",
+    "channels": "Canales directos",
+    "available": "Disponible para nuevas oportunidades",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "transmission": "Nueva transmisión",
+    "idKicker": "Identificación",
+    "freqKicker": "Frecuencia de retorno",
+    "msgKicker": "Mensaje",
+    "namePh": "¿Cómo te llamás?",
+    "emailPh": "tu@correo.com",
+    "messagePh": "Contame en qué puedo ayudarte…",
+    "sending": "Enviando señal…"
+  },
+  "footer": {
+    "built": "Hecho con React + TypeScript",
+    "social": "Redes sociales"
+  },
+  "galaxy": {
+    "warping": "Saltando…",
+    "ready": "Motor de salto listo",
+    "system": {
+      "intro": "Espacio profundo",
+      "home": "Sistema Origen",
+      "about": "Sistema Bitácora",
+      "projects": "Cúmulo de proyectos",
+      "contact": "Estación de enlace"
+    },
+    "gateKicker": "Transmisión entrante",
+    "gateLoading": "Fijando coordenadas",
+    "gateReady": "Coordenadas fijadas",
+    "enter": "Iniciar salto",
+    "skipIntro": "Entrar sin animación",
+    "reopen": "Volver a la entrada"
   }
 }

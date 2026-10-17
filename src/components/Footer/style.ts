@@ -17,9 +17,32 @@ export const FooterContainer = styled(Box).attrs({
   padding: 1.5rem 2rem;
   border-top: 1px solid var(--color-border-primary);
   margin-top: auto;
+
+  /* Deja lugar al HUD fijo de abajo */
+  @media (min-width: 769px) {
+    padding-bottom: 4rem;
+  }
 `;
 
 export const FooterContent = styled(Box)`
+  .reopen-gate {
+    padding: 0.3rem 0.5rem;
+    background: none;
+    border: none;
+    border-radius: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-light-tertiary);
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-accent-secondary);
+      filter: none;
+    }
+  }
+
   display: flex;
   flex-direction: column;         /* Mobile: columna (texto arriba, iconos abajo) */
   align-items: center;
