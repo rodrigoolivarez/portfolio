@@ -51,6 +51,26 @@ npm run dev
 | `npm run build`   | Build de producción en `dist/`   |
 | `npm run preview` | Sirve el build localmente        |
 
+## Métricas (Google Analytics 4)
+
+Se activa sólo en producción y si está definida `VITE_GA_MEASUREMENT_ID` (respeta "Do Not Track").
+Además de las vistas por sección, registra estos eventos:
+
+| Evento            | Cuándo                                             |
+| ----------------- | -------------------------------------------------- |
+| `project_open`    | Se abre un proyecto (`project`, `category`, `view`) |
+| `project_link`    | Clic en "Lanzar demo" o "Ver código" (`link_type`)  |
+| `generate_lead`   | Se envía el formulario de contacto                 |
+| `contact_channel` | Copia del email o clic en LinkedIn / GitHub        |
+| `gate_enter` · `gate_skip` · `gate_reopen` | Uso de la puerta de entrada |
+| `language_change` · `motion_toggle` | Preferencias del visitante |
+
+## Capturas de proyectos
+
+Las imágenes de Acción Animal y Castraciones son maquetas de ejemplo.
+Para usar las reales, reemplazá `src/assets/projects/accion-animal.webp` y `castraciones.webp`
+con el mismo nombre (ideal: 1000px de ancho, proporción 16:9).
+
 ## Estructura
 
 ```

@@ -4,6 +4,7 @@ import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 import MotionPhotosOffOutlinedIcon from "@mui/icons-material/MotionPhotosOffOutlined";
 import { useTranslation } from "react-i18next";
 import { useMotion } from "../../contexts/MotionContext";
+import { trackEvent } from "../../lib/analytics";
 
 /** Activa / reduce las animaciones (salto hiperespacial, intro, estelas) */
 const MotionToggle: React.FC = () => {
@@ -14,7 +15,10 @@ const MotionToggle: React.FC = () => {
   return (
     <Tooltip title={label}>
       <IconButton
-        onClick={toggleMotion}
+        onClick={() => {
+          trackEvent("motion_toggle", { animations: reduced ? "on" : "off" });
+          toggleMotion();
+        }}
         aria-label={label}
         aria-pressed={!reduced}
         size="small"

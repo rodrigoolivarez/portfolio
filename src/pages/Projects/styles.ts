@@ -236,6 +236,26 @@ export const DossierTop = styled.div`
     color: var(--color-accent-primary);
   }
 
+  .status.active {
+    color: var(--color-accent-warm);
+  }
+
+  /* "Proyecto actual" / "Side project" */
+  .category {
+    margin-left: 0.6rem;
+    padding: 0.1rem 0.45rem;
+    border: 1px solid currentColor;
+    letter-spacing: 0.14em;
+  }
+
+  .category.current {
+    color: var(--color-accent-secondary);
+  }
+
+  .category.side {
+    color: var(--color-text-light-tertiary);
+  }
+
   .dot {
     width: 6px;
     height: 6px;
@@ -381,6 +401,10 @@ export const MetaGrid = styled.dl`
     font-size: 0.95rem;
     color: var(--color-text-light-primary);
   }
+
+  .wide {
+    grid-column: 1 / -1;
+  }
 `;
 
 export const Modules = styled.div`
@@ -414,8 +438,17 @@ export const Modules = styled.div`
 export const Actions = styled.div`
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.85rem;
   margin-top: 1.75rem;
+
+  .private {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--color-text-light-tertiary);
+  }
 `;
 
 
@@ -428,6 +461,19 @@ export const Systems = styled.nav`
   justify-content: center;
   gap: 0.75rem;
   margin-top: 1.5rem;
+
+  .group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .group + .group {
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--color-border-primary);
+  }
 
   .label {
     font-size: 0.66rem;
@@ -447,8 +493,15 @@ export const Systems = styled.nav`
   @media (max-width: 600px) {
     margin-top: 1rem;
 
+    .group + .group {
+      padding-left: 0;
+      border-left: none;
+    }
+
     .label {
-      display: none;
+      flex-basis: 100%;
+      text-align: center;
+      font-size: 0.6rem;
     }
 
     ul {
@@ -493,6 +546,11 @@ export const Systems = styled.nav`
     border-radius: 50%;
     background: var(--planet);
     box-shadow: 0 0 8px var(--planet);
+  }
+
+  .side .dot {
+    border-radius: 0;
+    transform: rotate(45deg) scale(0.85);
   }
 `;
 
@@ -562,6 +620,33 @@ export const PlanetHit = styled.button`
 
   .index {
     color: var(--planet);
+  }
+
+  .badge {
+    align-self: center;
+    margin-left: 0.2rem;
+    padding: 0.05rem 0.35rem;
+    font-family: var(--font-primary);
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-on-accent);
+    background: var(--color-accent-secondary);
+  }
+
+  /* Satélites (proyectos personales): insignia de contorno en luz de luna */
+  .badge.side {
+    color: var(--color-accent-primary);
+    background: transparent;
+    border: 1px solid currentColor;
+  }
+
+  /* Proyectos actuales: un segundo anillo, como una luna en órbita */
+  &.current .ring {
+    opacity: 0.55;
+    border-style: solid;
+    inset: -6px;
   }
 
   &[data-edge="left"] .label {

@@ -9,6 +9,7 @@ import { HudButton } from "../ui/Hud";
 import { Canvas, Flash, Gate, Hud } from "./style";
 import { REOPEN_GATE_EVENT, reopenGate } from "./gate";
 import { planetBus } from "./planetBus";
+import { trackEvent } from "../../lib/analytics";
 
 const stationFor = (pathname: string): Station => {
   if (pathname.startsWith("/sobre-mi")) return "about";
@@ -196,6 +197,7 @@ const GalaxyBackground: React.FC = () => {
   // Volver a la puerta: la nave sale de la galaxia con un salto hacia atrás
   useEffect(() => {
     const onReopen = () => {
+      if (!introRef.current && quality) trackEvent("gate_reopen");
       // Sin galaxia (sin WebGL / ahorro de datos) no hay puerta que mostrar
       if (introRef.current || !quality) return;
       introRef.current = true;
@@ -215,6 +217,7 @@ const GalaxyBackground: React.FC = () => {
 
   const enter = () => {
     if (phase !== "gate") return;
+    trackEvent("gate_enter");
     const scene = sceneRef.current;
     markSeen();
     introRef.current = false;
@@ -232,6 +235,7 @@ const GalaxyBackground: React.FC = () => {
   };
 
   const skip = () => {
+    trackEvent("gate_skip");
     markSeen();
     introRef.current = false;
     sceneRef.current?.setStation(stationRef.current, { instant: true });
