@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SectionHeader } from '../../components/ui/Hud';
 import { planetBus } from '../../components/Galaxy/planetBus';
 import { PROJECTS } from '../../data/projects';
+import { trackEvent } from '../../lib/analytics';
 import OrbitalView from './OrbitalView';
 import ProjectDossier from './ProjectDossier';
 import {
@@ -32,9 +33,11 @@ const Projects: React.FC = () => {
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
+    // Si la escena tarda (equipo lento, shaders compilando), los planetas pueden llegar después
+    // del fallback: en ese caso igual se pasa a la vista orbital.
     let off = () => {};
     off = planetBus.subscribe(() => {
-      setView((v) => (v === 'pending' ? 'orbital' : v));
+      setView('orbital');
       off();
     });
     const fallback = window.setTimeout(() => setView((v) => (v === 'pending' ? 'classic' : v)), 2500);
@@ -57,6 +60,18 @@ const Projects: React.FC = () => {
 
   const select = useCallback((key: string | null) => setSelected(key), []);
 
+  // Métrica: qué proyecto se abre (vista orbital y vista clásica)
+  useEffect(() => {
+    if (!selected) return;
+    const p = PROJECTS.find((x) => x.key === selected);
+    trackEvent('project_open', { project: selected, category: p?.category ?? '', view: 'orbital' });
+  }, [selected]);
+
+  const openClassic = (i: number) => {
+    setActive(i);
+    trackEvent('project_open', { project: PROJECTS[i].key, category: PROJECTS[i].category, view: 'classic' });
+  };
+
   // Flechas del teclado en la vista clásica (patrón de pestañas accesibles)
   const onKeyDown = (e: React.KeyboardEvent) => {
     const forward = e.key === 'ArrowDown' || e.key === 'ArrowRight';
@@ -78,23 +93,29 @@ const Projects: React.FC = () => {
 
       {view !== 'classic' && (
         <Systems aria-label={t('projects.systems')}>
-          <span className="label">{t('projects.systems')}</span>
-          <ul>
-            {PROJECTS.map((p, i) => (
-              <li key={p.key}>
-                <button
-                  type="button"
-                  className={selected === p.key ? 'active' : undefined}
-                  aria-pressed={selected === p.key}
-                  onClick={() => setSelected(selected === p.key ? null : p.key)}
-                  style={{ '--planet': p.planet.light } as React.CSSProperties}
-                >
-                  <span className="dot" aria-hidden="true" />
-                  0{i + 1} · {t(`projects.items.${p.key}.title`)}
-                </button>
-              </li>
-            ))}
-          </ul>
+          {(['current', 'side'] as const).map((category) => (
+            <div className="group" key={category}>
+              <span className="label">{t(`projects.categoryPlural.${category}`)}</span>
+              <ul>
+                {PROJECTS.map((p, i) =>
+                  p.category !== category ? null : (
+                    <li key={p.key}>
+                      <button
+                        type="button"
+                        className={[selected === p.key ? 'active' : '', category].join(' ').trim()}
+                        aria-pressed={selected === p.key}
+                        onClick={() => setSelected(selected === p.key ? null : p.key)}
+                        style={{ '--planet': p.planet.light } as React.CSSProperties}
+                      >
+                        <span className="dot" aria-hidden="true" />
+                        0{i + 1} · {t(`projects.items.${p.key}.title`)}
+                      </button>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+          ))}
         </Systems>
       )}
 
@@ -115,7 +136,7 @@ const Projects: React.FC = () => {
                 aria-controls="project-dossier"
                 tabIndex={i === active ? 0 : -1}
                 className={i === active ? 'active' : undefined}
-                onClick={() => setActive(i)}
+                onClick={() => openClassic(i)}
               >
                 <Planet $light={p.planet.light} $dark={p.planet.dark} aria-hidden="true">
                   <span className="moon" />

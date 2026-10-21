@@ -28,20 +28,20 @@ type Box = { x: number; y: number; w: number; h: number };
 
 const SHAPES: Shape[] = [
   {
-    key: "empredemia",
-    to: "/proyectos#empredemia",
+    key: "accionanimal",
+    to: "/proyectos#accionanimal",
     nodes: [[0.02, 0.3], [0.22, 0.16], [0.42, 0.26], [0.58, 0.34], [0.66, 0.72], [0.98, 0.8], [0.94, 0.42]],
     edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 3]],
   },
   {
-    key: "portfolio",
-    to: "/proyectos#portfolio",
+    key: "castraciones",
+    to: "/proyectos#castraciones",
     nodes: [[0.02, 0.22], [0.26, 0.74], [0.5, 0.3], [0.74, 0.8], [0.98, 0.18]],
     edges: [[0, 1], [1, 2], [2, 3], [3, 4]],
   },
   {
-    key: "atm",
-    to: "/proyectos#atm",
+    key: "portfolio",
+    to: "/proyectos#portfolio",
     nodes: [[0.5, 0.02], [0.08, 0.4], [0.5, 0.52], [0.92, 0.4], [0.5, 0.98]],
     edges: [[0, 1], [1, 4], [4, 3], [3, 0], [0, 2], [2, 4]],
   },
@@ -58,15 +58,15 @@ const SHAPES: Shape[] = [
 // Posición de cada constelación (en % del área del hero) según el ancho disponible
 const LAYOUTS: Record<"wide" | "narrow", Record<string, Box>> = {
   wide: {
-    empredemia: { x: 4, y: 8, w: 19, h: 30 },
-    portfolio: { x: 78, y: 6, w: 17, h: 24 },
-    atm: { x: 8, y: 58, w: 12, h: 30 },
+    accionanimal: { x: 4, y: 8, w: 19, h: 30 },
+    castraciones: { x: 78, y: 6, w: 17, h: 24 },
+    portfolio: { x: 8, y: 58, w: 12, h: 30 },
     constancy: { x: 77, y: 54, w: 18, h: 34 },
   },
   narrow: {
-    empredemia: { x: 4, y: 0, w: 36, h: 15 },
-    portfolio: { x: 60, y: 1, w: 34, h: 13 },
-    atm: { x: 10, y: 84, w: 22, h: 15 },
+    accionanimal: { x: 4, y: 0, w: 36, h: 15 },
+    castraciones: { x: 60, y: 1, w: 34, h: 13 },
+    portfolio: { x: 10, y: 84, w: 22, h: 15 },
     constancy: { x: 60, y: 83, w: 34, h: 16 },
   },
 };

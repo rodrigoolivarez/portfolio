@@ -6,6 +6,9 @@ import App from './App';
 import { GlobalStyle } from './styles/Global';
 import "./i18n";
 import './index.css';
+import { initAnalytics } from './lib/analytics';
+
+initAnalytics();
 import { ColorModeProvider, useColorMode } from './contexts/ColorModeContext';
 import { MotionProvider } from './contexts/MotionContext';
 

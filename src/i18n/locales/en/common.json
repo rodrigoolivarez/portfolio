@@ -28,21 +28,21 @@
     "constHint": "Explore the sky: each constellation is part of my journey",
     "constNav": "Constellation map",
     "const": {
-      "empredemia": {
-        "name": "Empredemia",
-        "kind": "Full stack"
-      },
       "portfolio": {
         "name": "Portfolio",
-        "kind": "This site"
-      },
-      "atm": {
-        "name": "ATM",
-        "kind": "First project"
+        "kind": "Side project"
       },
       "constancy": {
         "name": "Persistence",
         "kind": "About me"
+      },
+      "accionanimal": {
+        "name": "Acción Animal",
+        "kind": "Current project"
+      },
+      "castraciones": {
+        "name": "Castraciones",
+        "kind": "Current project"
       }
     }
   },
@@ -96,20 +96,28 @@
       "portfolio": {
         "title": "Personal Portfolio",
         "desc": "This very site: React + TypeScript with a WebGL galaxy (three.js and custom shaders), hyperspace jumps between sections, an Interstellar-inspired black hole, i18n and a focus on performance and accessibility.",
-        "type": "Personal site · WebGL"
-      },
-      "atm": {
-        "title": "ATM Simulator",
-        "desc": "My first React project. Simulates an ATM (balance check and withdrawal) using local storage. Fully responsive. Enter PIN 1-6",
-        "type": "Web simulator"
+        "type": "Personal site · WebGL",
+        "role": "Personal project"
       },
       "empredemia": {
         "title": "Empredemia",
         "desc": "Course platform for entrepreneurs. Worked on React-Typescript, with NodeJS, MongoDB-Atlas for database (local-cloud) and JWTtoken-Bcrypt for validations and passwords",
         "type": "Full stack platform"
+      },
+      "accionanimal": {
+        "title": "Acción Animal",
+        "type": "Full stack platform · site, admin panel and API",
+        "role": "Lead full stack developer · team of 2",
+        "desc": "Appointment booking platform for Acción Animal's spay/neuter and vaccination campaigns. It includes the public site to book, search, reschedule and cancel appointments; an admin panel for campaigns, patients, no-shows and users; and an API with Mercado Pago or bank transfer payments and automatic email reminders with retries and auditing."
+      },
+      "castraciones": {
+        "title": "Castraciones",
+        "type": "Appointment system · API, site and dashboard",
+        "role": "Full stack · new features and maintenance",
+        "desc": "Appointment system for mass spay/neuter campaigns: a site to book and reschedule appointments with Mercado Pago payments, and a management dashboard with statistics. I built campaign rescheduling, which moves every appointment to the new date, across the API and the admin panel."
       }
     },
-    "lead": "A selection of projects where I applied frontend, backend and UI best practices.",
+    "lead": "The projects I'm working on today, plus a few side projects.",
     "sector": "Sector 02 · Projects",
     "listLabel": "Projects",
     "dossier": "Dossier",
@@ -118,16 +126,27 @@
     "modules": "Installed modules",
     "status": {
       "done": "Mission complete",
-      "orbit": "In orbit"
+      "orbit": "In orbit",
+      "active": "In active development"
     },
     "signalHolo": "Signal · Hologram",
     "signalRaw": "Signal · Original",
     "viewRaw": "View original",
     "viewHolo": "View hologram",
-    "leadOrbital": "Each planet is a project in orbit. Pick one to lock the signal and open its hologram.",
+    "leadOrbital": "Planets orbiting Gargantua are my current projects; satellites on tilted orbits are side projects. Pick one to open its hologram.",
     "systems": "Detected systems",
     "explore": "Explore planet",
-    "closeSignal": "Close signal"
+    "closeSignal": "Close signal",
+    "roleLabel": "My role",
+    "privateRepo": "Private repository",
+    "category": {
+      "current": "Current project",
+      "side": "Side project"
+    },
+    "categoryPlural": {
+      "current": "Current projects",
+      "side": "Side projects"
+    }
   },
   "contact": {
     "title": "Relay station",

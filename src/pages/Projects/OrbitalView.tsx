@@ -174,7 +174,7 @@ const OrbitalView: React.FC<Props> = ({ selected, onSelect }) => {
             hitRefs.current[p.key] = el;
           }}
           type="button"
-          className={selected === p.key ? 'selected' : undefined}
+          className={[selected === p.key ? 'selected' : '', p.category].join(' ').trim()}
           aria-label={`${t('projects.explore')}: ${t(`projects.items.${p.key}.title`)}`}
           aria-expanded={selected === p.key}
           onClick={() => onSelect(selected === p.key ? null : p.key)}
@@ -184,6 +184,7 @@ const OrbitalView: React.FC<Props> = ({ selected, onSelect }) => {
           <span className="label" aria-hidden="true">
             <span className="index">0{i + 1}</span>
             {t(`projects.items.${p.key}.title`)}
+            <span className={`badge ${p.category}`}>{t(`projects.category.${p.category}`)}</span>
           </span>
         </PlanetHit>
       ))}

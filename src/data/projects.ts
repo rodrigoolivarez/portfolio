@@ -1,5 +1,8 @@
+// Capturas: las de Acción Animal y Castraciones son maquetas de ejemplo.
+// Para usar las reales, reemplazá los archivos .webp con el mismo nombre (ideal: 1000px de ancho, 16:9).
+import accionAnimalImg from '../assets/projects/accion-animal.webp';
+import castracionesImg from '../assets/projects/castraciones.webp';
 import portfolioImg from '../assets/projects/portfolio.webp';
-import atmImg from '../assets/projects/CajeroImg.webp';
 import empredemiaImg from '../assets/projects/empredemia.webp';
 
 /** Cómo se ve y se mueve el planeta de cada proyecto alrededor de Gargantúa */
@@ -16,41 +19,60 @@ export type PlanetConfig = {
   tilt: number;
 };
 
+/** "current": en lo que trabajo hoy (órbitas internas, planetas grandes). "side": proyectos personales */
+export type ProjectCategory = 'current' | 'side';
+
 export type Project = {
   key: string;
+  category: ProjectCategory;
   image: string;
-  url: string;
+  /** Sitio publicado (si no hay, no se muestra el botón de demo) */
+  url?: string;
   github?: string;
+  /** Repositorio privado: se indica en lugar del botón de código */
+  privateRepo?: boolean;
   tags: string[];
-  status: 'done' | 'orbit';
+  status: 'active' | 'done' | 'orbit';
   planet: PlanetConfig;
 };
 
 export const PROJECTS: Project[] = [
   {
+    key: 'accionanimal',
+    category: 'current',
+    image: accionAnimalImg,
+    url: 'https://accionanimal.com.ar/',
+    privateRepo: true,
+    tags: ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Zod', 'Mercado Pago', 'Resend', 'Swagger', 'Vercel'],
+    status: 'active',
+    planet: { light: '#F28C5B', dark: '#7A2E14', orbit: 1.55, size: 0.17, phase: 0.9, tilt: 0.06 },
+  },
+  {
+    key: 'castraciones',
+    category: 'current',
+    image: castracionesImg,
+    privateRepo: true,
+    tags: ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Mercado Pago', 'Google Cloud'],
+    status: 'active',
+    planet: { light: '#8FD6C2', dark: '#1E4B52', orbit: 1.98, size: 0.15, phase: 3.6, tilt: -0.05 },
+  },
+  {
+    key: 'portfolio',
+    category: 'side',
+    image: portfolioImg,
+    url: 'https://portfolio-rodrigos-projects-28a435d7.vercel.app/',
+    github: 'https://github.com/rodrigoolivarez/portfolio',
+    tags: ['React', 'TypeScript', 'three.js', 'WebGL', 'styled-components', 'i18next'],
+    status: 'orbit',
+    planet: { light: '#C9D4FF', dark: '#2B2F6B', orbit: 2.4, size: 0.14, phase: 5.2, tilt: 0.38 },
+  },
+  {
     key: 'empredemia',
+    category: 'side',
     image: empredemiaImg,
     url: 'https://empredemia.netlify.app/',
     tags: ['React', 'TypeScript', 'Node.js', 'MongoDB Atlas', 'JWT', 'Bcrypt'],
     status: 'done',
-    planet: { light: '#F2B862', dark: '#8A3B16', orbit: 1.6, size: 0.13, phase: 0.6, tilt: 0.06 },
-  },
-  {
-    key: 'portfolio',
-    image: portfolioImg,
-    url: 'https://portfolio-git-main-rodrigos-projects-28a435d7.vercel.app/',
-    github: 'https://github.com/rodrigoolivarez/portfolio',
-    tags: ['React', 'TypeScript', 'three.js', 'WebGL', 'styled-components', 'i18next'],
-    status: 'orbit',
-    planet: { light: '#A9BFFF', dark: '#2B2F6B', orbit: 2.15, size: 0.16, phase: 2.9, tilt: -0.05 },
-  },
-  {
-    key: 'atm',
-    image: atmImg,
-    url: 'https://atm-app-navy.vercel.app/',
-    github: 'https://github.com/rodrigoolivarez/atm-app',
-    tags: ['React', 'JavaScript', 'LocalStorage', 'CSS'],
-    status: 'done',
-    planet: { light: '#9FE0D2', dark: '#1E4B52', orbit: 2.7, size: 0.11, phase: 4.6, tilt: 0.08 },
+    planet: { light: '#F2C76A', dark: '#6B4A12', orbit: 2.72, size: 0.14, phase: 2.2, tilt: -0.32 },
   },
 ];

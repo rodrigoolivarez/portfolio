@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "../../lib/analytics";
 
 type Lang = "es" | "en";
 
@@ -14,6 +15,7 @@ const LangFlagSelect: React.FC = () => {
   const next: Lang = lang === "es" ? "en" : "es";
 
   const change = () => {
+    trackEvent("language_change", { language: next });
     i18n.changeLanguage(next);
   };
 

@@ -13,6 +13,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import SensorsIcon from '@mui/icons-material/Sensors';
 
 import { useColorMode } from '../../contexts/ColorModeContext';
+import { trackEvent } from '../../lib/analytics';
 import { HudButton, SectionHeader } from '../../components/ui/Hud';
 import {
   ContactContainer,
@@ -60,6 +61,7 @@ const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
   const copyEmail = async () => {
+    trackEvent('contact_channel', { channel: 'email_copy' });
     try {
       await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
@@ -83,6 +85,7 @@ const Contact: React.FC = () => {
         import.meta.env.VITE_EMAILJS_API_KEY
       );
       setStatus({ type: 'success', text: t('contact.statusSuccess') });
+      trackEvent('generate_lead', { method: 'contact_form' });
       reset();
       recaptchaRef.current?.reset();
       setRecaptchaValue(null);
@@ -127,7 +130,12 @@ const Contact: React.FC = () => {
                 <LinkedInIcon className="icon" />
                 <div className="info">
                   <span className="kind">LinkedIn</span>
-                  <a href="https://www.linkedin.com/in/rodrigoolivarez/" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://www.linkedin.com/in/rodrigoolivarez/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent('contact_channel', { channel: 'linkedin' })}
+                  >
                     /in/rodrigoolivarez
                   </a>
                 </div>
@@ -136,7 +144,12 @@ const Contact: React.FC = () => {
                 <GitHubIcon className="icon" />
                 <div className="info">
                   <span className="kind">GitHub</span>
-                  <a href="https://github.com/rodrigoolivarez" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://github.com/rodrigoolivarez"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent('contact_channel', { channel: 'github' })}
+                  >
                     @rodrigoolivarez
                   </a>
                 </div>

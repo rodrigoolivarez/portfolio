@@ -28,21 +28,21 @@
     "constHint": "Explorá el cielo: cada constelación es parte de mi camino",
     "constNav": "Mapa de constelaciones",
     "const": {
-      "empredemia": {
-        "name": "Empredemia",
-        "kind": "Full stack"
-      },
       "portfolio": {
         "name": "Portfolio",
-        "kind": "Este sitio"
-      },
-      "atm": {
-        "name": "Cajero",
-        "kind": "Primer proyecto"
+        "kind": "Proyecto personal"
       },
       "constancy": {
         "name": "Constancia",
         "kind": "Sobre mí"
+      },
+      "accionanimal": {
+        "name": "Acción Animal",
+        "kind": "Proyecto actual"
+      },
+      "castraciones": {
+        "name": "Castraciones",
+        "kind": "Proyecto actual"
       }
     }
   },
@@ -96,20 +96,28 @@
       "portfolio": {
         "title": "Portfolio Personal",
         "desc": "Este mismo sitio: React + TypeScript con una galaxia en WebGL (three.js y shaders propios), saltos hiperespaciales entre secciones, un agujero negro inspirado en Interstellar, i18n y foco en rendimiento y accesibilidad.",
-        "type": "Sitio personal · WebGL"
-      },
-      "atm": {
-        "title": "Cajero Automático",
-        "desc": "Primer proyecto de React. Simula un cajero con consulta de saldo y retiro utilizando local storage. Diseño responsive. Introducir PIN 1-6",
-        "type": "Simulador web"
+        "type": "Sitio personal · WebGL",
+        "role": "Proyecto personal"
       },
       "empredemia": {
         "title": "Empredemia",
         "desc": "Plataforma de cursos para emprendedores. Trabajado en React-Typescript, junto con NodeJS, MongoDB-Atlas como base de datos (local-nube), JWTtoken-Bcrypt para validaciones y contraseñas.",
         "type": "Plataforma full stack"
+      },
+      "accionanimal": {
+        "title": "Acción Animal",
+        "type": "Plataforma full stack · sitio, panel y API",
+        "role": "Desarrollador full stack principal · equipo de 2",
+        "desc": "Plataforma de reserva de turnos para las jornadas de castración y vacunación de Acción Animal. Incluye el sitio público para reservar, buscar, reprogramar y cancelar turnos; un panel de administración de jornadas, pacientes, ausentes y usuarios; y una API con pagos por Mercado Pago o transferencia y recordatorios automáticos por email con reintentos y auditoría."
+      },
+      "castraciones": {
+        "title": "Castraciones",
+        "type": "Sistema de turnos · API, sitio y dashboard",
+        "role": "Full stack · nuevas funcionalidades y mantenimiento",
+        "desc": "Sistema de turnos para jornadas de castración masiva: sitio para reservar y reprogramar turnos con pago por Mercado Pago, y un dashboard de gestión con estadísticas. Desarrollé la reprogramación de jornadas, que mueve todos los turnos a la nueva fecha, tanto en la API como en el panel."
       }
     },
-    "lead": "Una selección de proyectos donde apliqué frontend, backend y buenas prácticas de UI.",
+    "lead": "Los proyectos en los que trabajo hoy y algunos proyectos personales.",
     "sector": "Sector 02 · Proyectos",
     "listLabel": "Proyectos",
     "dossier": "Dossier",
@@ -118,16 +126,27 @@
     "modules": "Módulos instalados",
     "status": {
       "done": "Misión completada",
-      "orbit": "En órbita"
+      "orbit": "En órbita",
+      "active": "En desarrollo activo"
     },
     "signalHolo": "Señal · Holograma",
     "signalRaw": "Señal · Original",
     "viewRaw": "Ver original",
     "viewHolo": "Ver holograma",
-    "leadOrbital": "Cada planeta es un proyecto en órbita. Elegí uno para fijar la señal y abrir su holograma.",
+    "leadOrbital": "Los planetas que orbitan a Gargantúa son mis proyectos actuales; los satélites en órbitas inclinadas, proyectos personales. Elegí uno para abrir su holograma.",
     "systems": "Sistemas detectados",
     "explore": "Explorar planeta",
-    "closeSignal": "Cerrar señal"
+    "closeSignal": "Cerrar señal",
+    "roleLabel": "Mi rol",
+    "privateRepo": "Repositorio privado",
+    "category": {
+      "current": "Proyecto actual",
+      "side": "Proyecto personal"
+    },
+    "categoryPlural": {
+      "current": "Proyectos actuales",
+      "side": "Proyectos personales"
+    }
   },
   "contact": {
     "title": "Estación de enlace",
