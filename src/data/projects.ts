@@ -1,5 +1,4 @@
-// Capturas: las de Acción Animal y Castraciones son maquetas de ejemplo.
-// Para usar las reales, reemplazá los archivos .webp con el mismo nombre (ideal: 1000px de ancho, 16:9).
+// Capturas reales en WebP (1000px de ancho). Para actualizarlas, reemplazá el archivo con el mismo nombre.
 import accionAnimalImg from '../assets/projects/accion-animal.webp';
 import castracionesImg from '../assets/projects/castraciones.webp';
 import portfolioImg from '../assets/projects/portfolio.webp';
@@ -60,7 +59,7 @@ export const PROJECTS: Project[] = [
     key: 'portfolio',
     category: 'side',
     image: portfolioImg,
-    url: 'https://portfolio-rodrigos-projects-28a435d7.vercel.app/',
+    url: 'https://rodrigoolivarez.netlify.app/',
     github: 'https://github.com/rodrigoolivarez/portfolio',
     tags: ['React', 'TypeScript', 'three.js', 'WebGL', 'styled-components', 'i18next'],
     status: 'orbit',

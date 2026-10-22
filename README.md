@@ -3,7 +3,7 @@
 Portfolio personal de **Rodrigo Olivarez**, desarrollador web Full Stack (Buenos Aires, Argentina).
 Bilingüe (ES / EN), con modo claro/oscuro y un fondo animado de estrellas hecho a mano con Canvas API.
 
-🔗 **Demo:** https://portfolio-git-main-rodrigos-projects-28a435d7.vercel.app/
+🔗 **Demo:** https://rodrigoolivarez.netlify.app/
 
 ## Stack
 
@@ -67,9 +67,8 @@ Además de las vistas por sección, registra estos eventos:
 
 ## Capturas de proyectos
 
-Las imágenes de Acción Animal y Castraciones son maquetas de ejemplo.
-Para usar las reales, reemplazá `src/assets/projects/accion-animal.webp` y `castraciones.webp`
-con el mismo nombre (ideal: 1000px de ancho, proporción 16:9).
+Están en `src/assets/projects/` en WebP (1000px de ancho). Para actualizar una, reemplazá el archivo
+con el mismo nombre; el visor muestra la parte superior en proporción 16:9.
 
 ## Estructura
 
